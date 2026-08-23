@@ -13,6 +13,7 @@ import UploadImage from '@/components/molecules/UploadImage';
 import Select from '@/components/molecules/Select';
 import MultiSelect from '@/components/molecules/MultiSelect';
 import {MOODS_OPTIONS} from '@/constants/moods';
+import ProfileMenu from './components/organisms/ProfileMenu';
 
 function App() {
 	return (
@@ -52,6 +53,7 @@ function App() {
 				label='How was your mood today?'
 				description='Select the mood that best describes your day.'
 			/>
+			<ProfileMenu user={{id: '1', name: 'Lisa Maria', email: 'lisa@mail.com'}} />
 		</>
 	);
 }
