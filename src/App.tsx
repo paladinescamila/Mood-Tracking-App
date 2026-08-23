@@ -13,6 +13,7 @@ import UploadImage from '@/components/molecules/UploadImage';
 import Select from '@/components/molecules/Select';
 import MultiSelect from '@/components/molecules/MultiSelect';
 import {MOODS_OPTIONS} from '@/constants/moods';
+import {FEELINGS_OPTIONS} from './constants/feelings';
 import ProfileMenu from './components/organisms/ProfileMenu';
 
 function App() {
@@ -41,17 +42,17 @@ function App() {
 			/>
 			<UploadImage value={null} onChange={() => {}} />
 			<Select
-				value='sad'
+				value='very-happy'
 				onChange={() => {}}
 				options={MOODS_OPTIONS}
 				label='How was your mood today?'
 			/>
 			<MultiSelect
-				value={['happy']}
+				value={['joyful', 'motivated', 'confident']}
 				onChange={() => {}}
-				options={MOODS_OPTIONS}
-				label='How was your mood today?'
-				description='Select the mood that best describes your day.'
+				options={FEELINGS_OPTIONS}
+				label='How did you feel?'
+				description='Select up to three tags:'
 			/>
 			<ProfileMenu user={{id: '1', name: 'Lisa Maria', email: 'lisa@mail.com'}} />
 		</>
