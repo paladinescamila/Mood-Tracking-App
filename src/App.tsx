@@ -5,7 +5,9 @@ import MoodIcon from '@/components/atoms/MoodIcon';
 import ProfilePicture from '@/components/atoms/ProfilePicture';
 import StepsProgress from '@/components/atoms/StepsProgress';
 import Tag from '@/components/atoms/Tag';
+import Card from '@/components/atoms/Card';
 import './index.css';
+import TextArea from './components/atoms/TextArea';
 
 function App() {
 	return (
@@ -23,6 +25,8 @@ function App() {
 			<Tag name='Tag' size='normal' checkStyle='circle' checked />
 			<StepsProgress progress={1} total={4} />
 			<ProfilePicture />
+			<Card>Hola</Card>
+			<TextArea value='' onChange={() => {}} aria-placeholder='Today I felt...' limit={150} />
 		</>
 	);
 }
