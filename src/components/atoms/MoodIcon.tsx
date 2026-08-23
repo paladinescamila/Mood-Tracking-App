@@ -19,9 +19,9 @@ const MOOD_ICONS: Record<Mood, {color: string; white: string}> = {
 
 interface MoodIconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 	mood: Mood;
-	mode: 'color' | 'white';
+	mode?: 'color' | 'white';
 }
 
-export default function MoodIcon({mood, mode, ...props}: MoodIconProps) {
+export default function MoodIcon({mood, mode = 'color', ...props}: MoodIconProps) {
 	return <img src={MOOD_ICONS[mood][mode]} alt={mood} {...props} />;
 }

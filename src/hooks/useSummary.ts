@@ -1,9 +1,10 @@
 import {useMemo} from 'react';
 import {useAppStore} from '@/stores/app';
-import {MOODS, MOODS_VALUES} from '@/constants/moods';
+import {MOODS, MOODS_DATA} from '@/constants/moods';
 import {getTrend} from '@/utils/getTrend';
 import {getAverage} from '@/utils/getAverage';
 import {getSleepHoursValue} from '@/utils/getSleepHoursValue';
+import {AVERAGES_LAST_CHECKINS} from '@/constants/dashboard';
 
 export const useSummary = () => {
 	const {todaysMood, moodsHistory} = useAppStore();
@@ -25,16 +26,16 @@ export const useSummary = () => {
 		}
 
 		// Calculate average mood
-		const moodsValues = moodsHistory.map((entry) => MOODS_VALUES[entry.mood]);
+		const moodsValues = moodsHistory.map((entry) => MOODS_DATA[entry.mood].value);
 		const averageMood = MOODS[Math.round(getAverage(moodsValues) || 0) - 1] || null;
 
 		// Calculate average sleep hours
 		const sleepHoursValues = moodsHistory.map((entry) => getSleepHoursValue(entry.sleepHours));
 		const averageSleepHours = getAverage(sleepHoursValues) || null;
 
-		// Determine trends based on the last 7 entries
-		const recentMoodValues = moodsValues.slice(-7);
-		const recentSleepHoursValues = sleepHoursValues.slice(-7);
+		// Determine trends based on the last entries
+		const recentMoodValues = moodsValues.slice(-AVERAGES_LAST_CHECKINS);
+		const recentSleepHoursValues = sleepHoursValues.slice(-AVERAGES_LAST_CHECKINS);
 
 		const moodTrend = getTrend(recentMoodValues);
 		const sleepHoursTrend = getTrend(recentSleepHoursValues);

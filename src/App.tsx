@@ -1,7 +1,13 @@
 import './index.css';
 
+import Dashboard from './components/pages/Dashboard';
+
 function App() {
-	return <></>;
+	return (
+		<>
+			<Dashboard />
+		</>
+	);
 }
 
 export default App;

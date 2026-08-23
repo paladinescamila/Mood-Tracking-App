@@ -1,5 +1,5 @@
-import Card from '../atoms/Card';
-import Logo from '@/assets/logo.svg';
+import Screen from '../atoms/Screen';
+import Logo from '../atoms/Logo';
 import Title from '../atoms/Title';
 import SubTitle from '../atoms/SubTitle';
 
@@ -11,17 +11,17 @@ interface NoUserProps {
 
 export default function NoUser({title, subtitle, children}: NoUserProps) {
 	return (
-		<main className='custom-gradient w-full min-h-dvh flex flex-col items-center justify-center gap-12 p-4'>
+		<Screen className='items-center justify-center gap-12'>
 			<header>
-				<img src={Logo} alt='Mood tracker logo' />
+				<Logo />
 			</header>
-			<Card className='flex flex-col gap-8 w-full md:w-132.5'>
+			<div className='flex flex-col gap-8 w-full md:w-132.5 px-4 md:px-8 py-10 rounded-2xl bg-neutral-0 card-shadow'>
 				<div className='flex flex-col gap-2'>
 					<Title>{title}</Title>
 					<SubTitle>{subtitle}</SubTitle>
 				</div>
 				{children}
-			</Card>
-		</main>
+			</div>
+		</Screen>
 	);
 }
