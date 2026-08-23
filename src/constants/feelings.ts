@@ -1,4 +1,4 @@
-export const FEELINGS_OPTIONS: Option[] = [
+export const FEELINGS_OPTIONS: Option<Feeling>[] = [
 	{label: 'Joyful', value: 'joyful'},
 	{label: 'Down', value: 'down'},
 	{label: 'Anxious', value: 'anxious'},

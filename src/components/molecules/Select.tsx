@@ -1,20 +1,20 @@
 import Tag from '@/components/atoms/Tag';
 
-interface SelectProps {
+interface SelectProps<T extends string> {
 	label: string;
 	description?: string;
-	options: Option[];
-	value: string;
-	onChange: (value: string) => void;
+	options: Option<T>[];
+	value: T;
+	onChange: (value: T) => void;
 }
 
-export default function Select({
+export default function Select<T extends string>({
 	label = '',
 	description = '',
 	options,
 	value,
 	onChange,
-}: SelectProps) {
+}: SelectProps<T>) {
 	return (
 		<div className='flex flex-col gap-6 md:gap-8'>
 			<label className='flex flex-col gap-1.5'>

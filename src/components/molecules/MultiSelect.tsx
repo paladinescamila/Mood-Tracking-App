@@ -1,20 +1,20 @@
 import Tag from '@/components/atoms/Tag';
 
-interface MultiSelectProps {
+interface MultiSelectProps<T extends string> {
 	label?: string;
 	description?: string;
-	options: Option[];
-	value: string[];
-	onChange: (value: string[]) => void;
+	options: Option<T>[];
+	value: T[];
+	onChange: (value: T[]) => void;
 }
 
-export default function MultiSelect({
+export default function MultiSelect<T extends string>({
 	label = '',
 	description = '',
 	options,
 	value,
 	onChange,
-}: MultiSelectProps) {
+}: MultiSelectProps<T>) {
 	return (
 		<div className='flex flex-col gap-6 md:gap-8'>
 			<label className='flex flex-col gap-1.5'>

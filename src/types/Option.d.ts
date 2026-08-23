@@ -1,5 +1,5 @@
-type Option = {
+type Option<T extends string> = {
 	label: string;
-	value: string;
+	value: T;
 	icon?: React.ReactNode;
 };

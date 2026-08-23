@@ -1,6 +1,6 @@
 import MoodIcon from '@/components/atoms/MoodIcon';
 
-export const MOODS_OPTIONS: Option[] = [
+export const MOODS_OPTIONS: Option<Mood>[] = [
 	{
 		label: 'Very Happy',
 		value: 'very-happy',
