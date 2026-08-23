@@ -1,4 +1,4 @@
-import ErrorMessage from './ErrorMessage';
+import ErrorMessage from '@/components/atoms/ErrorMessage';
 
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
 	label?: string;

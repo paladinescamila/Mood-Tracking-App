@@ -1,10 +1,10 @@
-import Button from './components/atoms/Button';
-import Icon from './components/atoms/Icon';
-import Input from './components/atoms/Input';
-import MoodIcon from './components/atoms/MoodIcon';
-import ProfilePicture from './components/atoms/ProfilePicture';
-import StepsProgress from './components/atoms/StepsProgress';
-import Tag from './components/atoms/Tag';
+import Button from '@/components/atoms/Button';
+import Icon from '@/components/atoms/Icon';
+import Input from '@/components/atoms/Input';
+import MoodIcon from '@/components/atoms/MoodIcon';
+import ProfilePicture from '@/components/atoms/ProfilePicture';
+import StepsProgress from '@/components/atoms/StepsProgress';
+import Tag from '@/components/atoms/Tag';
 import './index.css';
 
 function App() {
