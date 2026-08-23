@@ -1,12 +1,12 @@
-interface StepsProgressProps extends React.HTMLAttributes<HTMLDivElement> {
+interface StepsProgressProps {
 	progress: number;
 	total: number;
 	className?: string;
 }
 
-export default function StepsProgress({progress, total, className, ...props}: StepsProgressProps) {
+export default function StepsProgress({progress, total, className = ''}: StepsProgressProps) {
 	return (
-		<div className={`flex flex-row items-center gap-4 ${className || ''}`} {...props}>
+		<div className={`flex flex-row items-center gap-4 ${className}`}>
 			{Array.from({length: total}, (_, index) => (
 				<div
 					key={index}

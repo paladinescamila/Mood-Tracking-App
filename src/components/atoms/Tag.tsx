@@ -6,12 +6,22 @@ interface TagProps {
 	onClick?: () => void;
 	checkStyle?: 'square' | 'circle';
 	size?: 'small' | 'normal';
+	icon?: React.ReactNode;
+	className?: string;
 }
 
-export default function Tag({name, checked, onClick, checkStyle, size}: TagProps) {
+export default function Tag({
+	name,
+	checked = false,
+	onClick,
+	checkStyle = 'circle',
+	size = 'normal',
+	icon,
+	className = '',
+}: TagProps) {
 	return (
 		<div
-			className={`flex flex-row items-center py-3 rounded-[10px] cursor-pointer w-max border-2 ${size === 'small' ? 'gap-2 px-4 text-preset-6-regular' : 'gap-3 px-5 text-preset-5'} ${checked ? 'border-blue-600' : 'border-blue-100'}`}
+			className={`flex flex-row items-center py-3 rounded-[10px] cursor-pointer bg-neutral-0 w-max border-2 ${size === 'small' ? 'gap-2 px-4 text-preset-6-regular' : 'gap-3 px-5 text-preset-5'} ${checked ? 'border-blue-600' : 'border-blue-100'} ${className}`}
 			onClick={onClick}>
 			{checkStyle === 'square' ? (
 				<div
@@ -23,6 +33,7 @@ export default function Tag({name, checked, onClick, checkStyle, size}: TagProps
 					className={`w-5 h-5 rounded-full ${checked ? 'border-5 border-blue-600' : 'border-2 border-blue-200'}`}></div>
 			)}
 			<span>{name}</span>
+			{icon && <div className='ml-auto'>{icon}</div>}
 		</div>
 	);
 }

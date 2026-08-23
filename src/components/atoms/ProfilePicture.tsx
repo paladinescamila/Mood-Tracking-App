@@ -2,8 +2,21 @@ import AvatarPlaceholder from '@/assets/avatar-placeholder.svg';
 
 interface ProfilePictureProps extends React.HTMLAttributes<HTMLImageElement> {
 	src?: string;
+	size?: 'small' | 'normal' | 'large';
+	className?: string;
 }
 
-export default function ProfilePicture({src, ...props}: ProfilePictureProps) {
-	return <img src={src || AvatarPlaceholder} {...props} />;
+export default function ProfilePicture({
+	src,
+	size = 'normal',
+	className = '',
+	...props
+}: ProfilePictureProps) {
+	return (
+		<img
+			src={src || AvatarPlaceholder}
+			className={`${size === 'small' ? 'w-10 h-10' : size === 'normal' ? 'w-16 h-16' : 'w-24 h-24'} rounded-full ${className}`}
+			{...props}
+		/>
+	);
 }

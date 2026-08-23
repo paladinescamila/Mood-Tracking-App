@@ -1,3 +1,5 @@
+import './index.css';
+
 import Button from '@/components/atoms/Button';
 import Icon from '@/components/atoms/Icon';
 import Input from '@/components/atoms/Input';
@@ -6,8 +8,11 @@ import ProfilePicture from '@/components/atoms/ProfilePicture';
 import StepsProgress from '@/components/atoms/StepsProgress';
 import Tag from '@/components/atoms/Tag';
 import Card from '@/components/atoms/Card';
-import './index.css';
-import TextArea from './components/atoms/TextArea';
+import TextArea from '@/components/atoms/TextArea';
+import UploadImage from '@/components/molecules/UploadImage';
+import Select from '@/components/molecules/Select';
+import MultiSelect from '@/components/molecules/MultiSelect';
+import {MOODS_OPTIONS} from '@/constants/moods';
 
 function App() {
 	return (
@@ -26,7 +31,27 @@ function App() {
 			<StepsProgress progress={1} total={4} />
 			<ProfilePicture />
 			<Card>Hola</Card>
-			<TextArea value='' onChange={() => {}} aria-placeholder='Today I felt...' limit={150} />
+			<TextArea
+				label='Write about your day...'
+				value=''
+				onChange={() => {}}
+				aria-placeholder='Today I felt...'
+				limit={150}
+			/>
+			<UploadImage value={null} onChange={() => {}} />
+			<Select
+				value='sad'
+				onChange={() => {}}
+				options={MOODS_OPTIONS}
+				label='How was your mood today?'
+			/>
+			<MultiSelect
+				value={['happy']}
+				onChange={() => {}}
+				options={MOODS_OPTIONS}
+				label='How was your mood today?'
+				description='Select the mood that best describes your day.'
+			/>
 		</>
 	);
 }
