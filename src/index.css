@@ -23,8 +23,12 @@
 	--font-family: 'Reddit Sans', sans-serif;
 }
 
-@utility gradient {
+@utility custom-gradient {
 	background: linear-gradient(180deg, #f5f5ff 72.99%, #e0e0ff 100%);
+}
+
+@utility custom-outline {
+	@apply focus:outline-2 outline-offset-3 outline-blue-600;
 }
 
 @utility text-preset-1 {
