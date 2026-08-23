@@ -1,5 +1,5 @@
 import {useRef} from 'react';
-import ProfilePicture from '@/components/atoms/ProfilePicture';
+import Photo from '@/components/atoms/Photo';
 import Button from '@/components/atoms/Button';
 
 export default function UploadImage({
@@ -28,7 +28,7 @@ export default function UploadImage({
 				className='hidden'
 				ref={inputRef}
 			/>
-			<ProfilePicture src={src} />
+			<Photo src={src} />
 			<div className='flex flex-col gap-4'>
 				<div className='flex flex-col gap-1.5'>
 					<p className='text-preset-6-regular text-neutral-900'>Upload Image</p>

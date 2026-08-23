@@ -1,3 +1,5 @@
+import Title from './Title';
+
 interface TextAreaProps extends Omit<
 	React.TextareaHTMLAttributes<HTMLTextAreaElement>,
 	'onChange' | 'value'
@@ -22,7 +24,7 @@ export default function TextArea({
 	return (
 		<div className='flex flex-col gap-2'>
 			<label className='flex flex-col gap-1.5 mb-4 md:mb-6'>
-				<p className='text-preset-3 text-neutral-900'>{label}</p>
+				<Title>{label}</Title>
 				{description && <p className='text-preset-6 text-neutral-600'>{description}</p>}
 			</label>
 			<textarea

@@ -1,17 +1,12 @@
 import AvatarPlaceholder from '@/assets/avatar-placeholder.svg';
 
-interface ProfilePictureProps extends React.HTMLAttributes<HTMLImageElement> {
+interface PhotoProps extends React.HTMLAttributes<HTMLImageElement> {
 	src?: string;
 	size?: 'small' | 'normal' | 'large';
 	className?: string;
 }
 
-export default function ProfilePicture({
-	src,
-	size = 'normal',
-	className = '',
-	...props
-}: ProfilePictureProps) {
+export default function Photo({src, size = 'normal', className = '', ...props}: PhotoProps) {
 	return (
 		<img
 			src={src || AvatarPlaceholder}

@@ -1,4 +1,5 @@
 import Tag from '@/components/atoms/Tag';
+import Title from '../atoms/Title';
 
 interface MultiSelectProps<T extends string> {
 	label?: string;
@@ -18,7 +19,7 @@ export default function MultiSelect<T extends string>({
 	return (
 		<div className='flex flex-col gap-6 md:gap-8'>
 			<label className='flex flex-col gap-1.5'>
-				<p className='text-preset-3 text-neutral-900'>{label}</p>
+				<Title>{label}</Title>
 				{description && <p className='text-preset-6 text-neutral-600'>{description}</p>}
 			</label>
 			<ul className='flex flex-row flex-wrap gap-x-4 gap-y-3'>

@@ -1,11 +1,11 @@
 import Icon from '../atoms/Icon';
-import ProfilePicture from '../atoms/ProfilePicture';
+import Photo from '../atoms/Photo';
 
 export default function ProfileMenu({user}: {user: User}) {
 	return (
 		<div className='relative'>
 			<button className='flex flex-row gap-2.5 items-center cursor-pointer'>
-				<ProfilePicture src={user.profilePicture} className='w-10 h-10' />
+				<Photo src={user.photo} className='w-10 h-10' />
 				<Icon icon='dropdown-arrow' />
 			</button>
 			<div className='absolute top-[100%+8px] ring-0 px-4 py-3 bg-neutral-0 rounded flex flex-col gap-3 w-50 menu-shadow'>

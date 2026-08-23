@@ -3,7 +3,7 @@ import {create} from 'zustand';
 interface AppState {
 	user: User | null;
 	setUser: (user: User | null) => void;
-	updateUser: (updates: Pick<User, 'name' | 'profilePicture'>) => void;
+	updateUser: (updates: Pick<User, 'name' | 'photo'>) => void;
 
 	todaysMood: MoodEntry | null;
 	setTodaysMood: (mood: MoodEntry | null) => void;

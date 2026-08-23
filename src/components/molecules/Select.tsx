@@ -1,4 +1,6 @@
 import Tag from '@/components/atoms/Tag';
+import Title from '../atoms/Title';
+import SubTitle from '../atoms/Subtitle';
 
 interface SelectProps<T extends string> {
 	label: string;
@@ -18,8 +20,8 @@ export default function Select<T extends string>({
 	return (
 		<div className='flex flex-col gap-6 md:gap-8'>
 			<label className='flex flex-col gap-1.5'>
-				<p className='text-preset-3 text-neutral-900'>{label}</p>
-				{description && <p className='text-preset-6 text-neutral-600'>{description}</p>}
+				<Title>{label}</Title>
+				{description && <SubTitle>{description}</SubTitle>}
 			</label>
 			<ul className='flex flex-col gap-3'>
 				{options.map((option) => (
