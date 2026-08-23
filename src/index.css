@@ -1,0 +1,145 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-neutral-900: #21214d;
+	--color-neutral-600: #57577b;
+	--color-neutral-300: #9393b7;
+	--color-neutral-200: #cbcdd0;
+	--color-neutral-0: #ffffff;
+
+	--color-blue-700: #2a4cd5;
+	--color-blue-600: #4865db;
+	--color-blue-200: #c7d3f7;
+	--color-blue-100: #e0e6fa;
+
+	--color-red-700: #e60013;
+
+	--color-red-300: #ff9b99;
+	--color-indigo-200: #b8b1ff;
+	--color-blue-300: #89caff;
+	--color-green-300: #89e780;
+	--color-amber-300: #ffc97c;
+
+	--font-family: 'Reddit Sans', sans-serif;
+}
+
+@utility gradient {
+	background: linear-gradient(180deg, #f5f5ff 72.99%, #e0e0ff 100%);
+}
+
+@utility text-preset-1 {
+	font-family: var(--font-family);
+	font-weight: 700;
+	font-size: 52px;
+	line-height: 140%;
+	letter-spacing: -2px;
+}
+
+@utility text-preset-1-mobile {
+	font-family: var(--font-family);
+	font-weight: 700;
+	font-size: 46px;
+	line-height: 120%;
+	letter-spacing: -2px;
+}
+
+@utility text-preset-2 {
+	font-family: var(--font-family);
+	font-weight: 700;
+	font-size: 40px;
+	line-height: 120%;
+	letter-spacing: -0.3px;
+}
+
+@utility text-preset-2-mobile {
+	font-family: var(--font-family);
+	font-weight: 700;
+	font-size: 32px;
+	line-height: 120%;
+	letter-spacing: -0.3px;
+}
+
+@utility text-preset-3 {
+	font-family: var(--font-family);
+	font-weight: 700;
+	font-size: 32px;
+	line-height: 140%;
+	letter-spacing: -0.3px;
+}
+
+@utility text-preset-3-mobile {
+	font-family: var(--font-family);
+	font-weight: 700;
+	font-size: 28px;
+	line-height: 130%;
+	letter-spacing: -0.3px;
+}
+
+@utility text-preset-4 {
+	font-family: var(--font-family);
+	font-weight: 600;
+	font-size: 24px;
+	line-height: 140%;
+	letter-spacing: 0px;
+}
+
+@utility text-preset-4-regular {
+	font-family: var(--font-family);
+	font-size: 24px;
+	line-height: 140%;
+	letter-spacing: 0px;
+}
+
+@utility text-preset-5 {
+	font-family: var(--font-family);
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 140%;
+	letter-spacing: 0px;
+}
+
+@utility text-preset-6 {
+	font-family: var(--font-family);
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 120%;
+	letter-spacing: 0px;
+}
+
+@utility text-preset-6-italic {
+	font-family: var(--font-family);
+	font-weight: 500;
+	font-style: italic;
+	font-size: 18px;
+	line-height: 130%;
+	letter-spacing: 0px;
+}
+
+@utility text-preset-6-regular {
+	font-family: var(--font-family);
+	font-size: 18px;
+	line-height: 140%;
+	letter-spacing: -0.3px;
+}
+
+@utility text-preset-7 {
+	font-family: var(--font-family);
+	font-size: 15px;
+	line-height: 140%;
+	letter-spacing: -0.3px;
+}
+
+@utility text-preset-8 {
+	font-family: var(--font-family);
+	font-weight: 600;
+	font-size: 13px;
+	line-height: 100%;
+	letter-spacing: 0px;
+}
+
+@utility text-preset-9 {
+	font-family: var(--font-family);
+	font-size: 12px;
+	line-height: 110%;
+	letter-spacing: 0px;
+}
