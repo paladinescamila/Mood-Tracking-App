@@ -1,9 +1,10 @@
 type MoodEntry = {
+	id: string;
 	createdAt: Date;
 	mood: Mood;
 	feelings: Feeling[];
 	journalEntry: string;
-	sleepHours: number;
+	sleepHours: SleepHours;
 };
 
 type Mood = 'very-happy' | 'happy' | 'neutral' | 'sad' | 'very-sad';
@@ -29,3 +30,5 @@ type Feeling =
 	| 'disappointed'
 	| 'optimistic'
 	| 'restless';
+
+type SleepHours = '0-2' | '3-4' | '5-6' | '7-8' | '9+';

@@ -1,5 +1,15 @@
 import MoodIcon from '@/components/atoms/MoodIcon';
 
+export const MOODS: Mood[] = ['very-sad', 'sad', 'neutral', 'happy', 'very-happy'];
+
+export const MOODS_VALUES: Record<Mood, number> = {
+	'very-happy': 5,
+	happy: 4,
+	neutral: 3,
+	sad: 2,
+	'very-sad': 1,
+};
+
 export const MOODS_OPTIONS: Option<Mood>[] = [
 	{
 		label: 'Very Happy',
