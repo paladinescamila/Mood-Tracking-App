@@ -32,3 +32,10 @@ type Feeling =
 	| 'restless';
 
 type SleepHours = '0-2' | '3-4' | '5-6' | '7-8' | '9+';
+
+type MoodEntryForm = {
+	mood: Mood | null;
+	feelings: Feeling[];
+	journalEntry: string;
+	sleepHours: SleepHours | null;
+};

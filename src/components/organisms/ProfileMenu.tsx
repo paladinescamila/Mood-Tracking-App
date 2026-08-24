@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import Icon from '../atoms/Icon';
-import Photo from '../atoms/Photo';
+import Icon from '@/components/atoms/Icon';
+import Photo from '@/components/atoms/Photo';
 
 export default function ProfileMenu({user}: {user: User}) {
 	const [menuIsOpened, setMenuIsOpened] = useState(false);

@@ -1,5 +1,5 @@
 import BGPatterAverages from '@/assets/bg-pattern-averages.svg';
-import Icon from '../atoms/Icon';
+import Icon from '@/components/atoms/Icon';
 
 export default function AverageCard({
 	icon,

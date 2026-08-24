@@ -1,11 +1,11 @@
 import './index.css';
 
-import Dashboard from './components/pages/Dashboard';
+import AddEntryWindow from './components/pages/AddEntryWindow';
 
 function App() {
 	return (
 		<>
-			<Dashboard />
+			<AddEntryWindow />
 		</>
 	);
 }

@@ -1,16 +1,16 @@
-import Logo from '../atoms/Logo';
-import ProfileMenu from '../organisms/ProfileMenu';
-import Screen from '../atoms/Screen';
+import Logo from '@/components/atoms/Logo';
+import ProfileMenu from '@/components/organisms/ProfileMenu';
+import Screen from '@/components/atoms/Screen';
 import {SAMPLE_USER, SAMPLE_MOOD_ENTRY, SAMPLE_MOOD_ENTRIES} from '@/constants/sampleData';
-import Button from '../atoms/Button';
-import Card from '../atoms/Card';
+import Button from '@/components/atoms/Button';
+import Card from '@/components/atoms/Card';
 import {MOODS_DATA} from '@/constants/moods';
-import Icon from '../atoms/Icon';
-import MoodIcon from '../atoms/MoodIcon';
+import Icon from '@/components/atoms/Icon';
+import MoodIcon from '@/components/atoms/MoodIcon';
 import {getDateText} from '@/utils/getDateText';
 import {FEELINGS_DATA} from '@/constants/feelings';
-import Averages from '../organisms/Averages';
-import Chart from '../organisms/Chart';
+import Averages from '@/components/organisms/Averages';
+import Chart from '@/components/organisms/Chart';
 
 export default function Dashboard() {
 	return (
@@ -59,7 +59,7 @@ export default function Dashboard() {
 					</div>
 					<p className='text-preset-6 text-neutral-900 h-full'>{SAMPLE_MOOD_ENTRY.journalEntry}</p>
 					<div className='flex flex-row gap-3 flex-wrap'>
-						{SAMPLE_MOOD_ENTRY.feelings.slice(0, 3).map((feeling, index) => (
+						{SAMPLE_MOOD_ENTRY.feelings.map((feeling, index) => (
 							<p key={index} className='text-preset-6-italic text-neutral-600'>
 								#{FEELINGS_DATA[feeling].name}
 							</p>

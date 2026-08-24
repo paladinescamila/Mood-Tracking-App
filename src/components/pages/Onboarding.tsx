@@ -1,8 +1,8 @@
 import {useState} from 'react';
-import NoUser from '../templates/NoUser';
-import Button from '../atoms/Button';
-import UploadImage from '../molecules/UploadImage';
-import Input from '../atoms/Input';
+import NoUser from '@/components/templates/NoUser';
+import Button from '@/components/atoms/Button';
+import UploadImage from '@/components/molecules/UploadImage';
+import Input from '@/components/atoms/Input';
 
 export default function Onboarding() {
 	const [name, setName] = useState<string>('');

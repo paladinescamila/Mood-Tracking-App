@@ -1,7 +1,7 @@
-import Card from '../atoms/Card';
-import Icon from '../atoms/Icon';
-import AverageCard from '../molecules/AverageCard';
-import MoodIcon from '../atoms/MoodIcon';
+import Card from '@/components/atoms/Card';
+import Icon from '@/components/atoms/Icon';
+import AverageCard from '@/components/molecules/AverageCard';
+import MoodIcon from '@/components/atoms/MoodIcon';
 import {AVERAGES_LAST_CHECKINS} from '@/constants/dashboard';
 import {MOODS_DATA} from '@/constants/moods';
 

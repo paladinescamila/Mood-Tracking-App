@@ -1,12 +1,12 @@
 import Tag from '@/components/atoms/Tag';
-import Title from '../atoms/Title';
-import SubTitle from '../atoms/Subtitle';
+import Title from '@/components/atoms/Title';
+import SubTitle from '@/components/atoms/SubTitle';
 
 interface SelectProps<T extends string> {
 	label: string;
 	description?: string;
 	options: Option<T>[];
-	value: T;
+	value: T | null;
 	onChange: (value: T) => void;
 }
 

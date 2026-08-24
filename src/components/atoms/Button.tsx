@@ -14,7 +14,7 @@ export default function Button({
 }: ButtonProps) {
 	return (
 		<button
-			className={`${type === 'primary' ? 'px-8 py-3 rounded-xl text-preset-5 text-neutral-0 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-200' : 'px-4 py-2 rounded-lg bg-neutral-0 text-preset-6 text-neutral-900 border border-neutral-300 hover:border-neutral-900 disabled:text-neutral-300 disabled:border-neutral-300'} custom-outline cursor-pointer disabled:cursor-not-allowed ${className}`}
+			className={`${type === 'primary' ? 'px-8 py-3 rounded-xl text-preset-5 text-neutral-0 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-200' : 'px-4 py-2 rounded-lg bg-neutral-0 text-preset-6 text-neutral-900 border border-neutral-300 hover:border-neutral-900 disabled:text-neutral-300 disabled:border-neutral-300'} custom-outline cursor-pointer disabled:cursor-not-allowed select-none ${className}`}
 			{...props}
 			disabled={disabled}>
 			{children}

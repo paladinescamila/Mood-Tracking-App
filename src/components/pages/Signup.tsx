@@ -1,8 +1,8 @@
 import {useState} from 'react';
 
-import NoUser from '../templates/NoUser';
-import Input from '../atoms/Input';
-import Button from '../atoms/Button';
+import NoUser from '@/components/templates/NoUser';
+import Input from '@/components/atoms/Input';
+import Button from '@/components/atoms/Button';
 
 export default function Signup() {
 	const [email, setEmail] = useState<string>('');

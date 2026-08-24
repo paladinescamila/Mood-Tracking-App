@@ -32,8 +32,8 @@ export default function Tag({
 				<div
 					className={`w-5 h-5 rounded-full ${checked ? 'border-5 border-blue-600' : 'border-2 border-blue-200'}`}></div>
 			)}
-			<span>{name}</span>
-			{icon && <div className='ml-auto'>{icon}</div>}
+			<span className='select-none'>{name}</span>
+			{icon && <div className='ml-auto select-none'>{icon}</div>}
 		</div>
 	);
 }

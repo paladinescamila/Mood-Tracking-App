@@ -1,7 +1,7 @@
-import Screen from '../atoms/Screen';
-import Logo from '../atoms/Logo';
-import Title from '../atoms/Title';
-import SubTitle from '../atoms/SubTitle';
+import Screen from '@/components/atoms/Screen';
+import Logo from '@/components/atoms/Logo';
+import Title from '@/components/atoms/Title';
+import SubTitle from '@/components/atoms/SubTitle';
 
 interface NoUserProps {
 	title: string;

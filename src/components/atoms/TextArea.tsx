@@ -1,4 +1,4 @@
-import Title from './Title';
+import Title from '@/components/atoms/Title';
 
 interface TextAreaProps extends Omit<
 	React.TextareaHTMLAttributes<HTMLTextAreaElement>,
@@ -33,6 +33,7 @@ export default function TextArea({
 				value={value}
 				onChange={(e) => onChange(e.target.value)}
 				rows={5}
+				maxLength={limit}
 			/>
 			{limit ? (
 				<p className='text-preset-8 text-neutral-600 self-end'>

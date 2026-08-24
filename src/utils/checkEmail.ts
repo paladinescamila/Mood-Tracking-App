@@ -1,0 +1,2 @@
+export const checkEmail = (text: string) =>
+	/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(text);
