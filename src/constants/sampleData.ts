@@ -6,7 +6,7 @@ export const SAMPLE_USER: User = {
 
 export const SAMPLE_MOOD_ENTRY: MoodEntry = {
 	id: '',
-	createdAt: new Date(),
+	createdAt: new Date().toISOString(),
 	mood: 'happy',
 	feelings: ['joyful', 'motivated', 'hopeful'],
 	journalEntry: 'Had an amazing morning run and feel full of energy!',
@@ -16,7 +16,7 @@ export const SAMPLE_MOOD_ENTRY: MoodEntry = {
 export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	{
 		id: '',
-		createdAt: new Date('2025-03-20T09:00:00Z'),
+		createdAt: new Date('2025-03-20T09:00:00Z').toISOString(),
 		mood: 'very-happy',
 		feelings: ['joyful', 'motivated', 'hopeful'],
 		journalEntry: 'Had an amazing morning run and feel full of energy!',
@@ -24,7 +24,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-03-24T10:30:00Z'),
+		createdAt: new Date('2025-03-24T10:30:00Z').toISOString(),
 		mood: 'happy',
 		feelings: ['grateful', 'calm'],
 		journalEntry: 'Spent time with family, feeling relaxed and thankful.',
@@ -32,7 +32,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-03-26T08:15:00Z'),
+		createdAt: new Date('2025-03-26T08:15:00Z').toISOString(),
 		mood: 'neutral',
 		feelings: ['peaceful'],
 		journalEntry: 'Routine day at work, nothing too exciting or stressful.',
@@ -40,7 +40,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-03-28T07:50:00Z'),
+		createdAt: new Date('2025-03-28T07:50:00Z').toISOString(),
 		mood: 'sad',
 		feelings: ['down', 'tired'],
 		journalEntry: "Tough day. Didn't sleep well and felt drained at work.",
@@ -48,7 +48,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-03-31T11:00:00Z'),
+		createdAt: new Date('2025-03-31T11:00:00Z').toISOString(),
 		mood: 'sad',
 		feelings: ['disappointed', 'frustrated'],
 		journalEntry: 'Got some bad news. Trying to process my emotions.',
@@ -56,7 +56,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-04-02T12:05:00Z'),
+		createdAt: new Date('2025-04-02T12:05:00Z').toISOString(),
 		mood: 'happy',
 		feelings: ['excited', 'content'],
 		journalEntry: 'A good friend visited, which lifted my spirits a lot.',
@@ -64,7 +64,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-04-04T09:15:00Z'),
+		createdAt: new Date('2025-04-04T09:15:00Z').toISOString(),
 		mood: 'very-sad',
 		feelings: ['overwhelmed', 'lonely'],
 		journalEntry: 'Feeling isolated. Need to talk to someone soon.',
@@ -72,7 +72,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-04-06T19:45:00Z'),
+		createdAt: new Date('2025-04-06T19:45:00Z').toISOString(),
 		mood: 'neutral',
 		feelings: ['irritable'],
 		journalEntry: 'Woke up in a grouchy mood but it got better by evening.',
@@ -80,7 +80,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-04-07T10:55:00Z'),
+		createdAt: new Date('2025-04-07T10:55:00Z').toISOString(),
 		mood: 'happy',
 		feelings: ['optimistic', 'confident'],
 		journalEntry: 'Good progress on personal goals today, feeling proud.',
@@ -88,7 +88,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-04-09T07:30:00Z'),
+		createdAt: new Date('2025-04-09T07:30:00Z').toISOString(),
 		mood: 'very-happy',
 		feelings: ['joyful', 'excited', 'grateful'],
 		journalEntry: 'Slept well and woke up ready to tackle new challenges.',
@@ -96,7 +96,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-04-10T08:30:00Z'),
+		createdAt: new Date('2025-04-10T08:30:00Z').toISOString(),
 		mood: 'sad',
 		feelings: ['lonely', 'anxious'],
 		journalEntry: 'Feeling a bit off. Hoping tomorrow is better.',
@@ -104,7 +104,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-04-12T08:00:00Z'),
+		createdAt: new Date('2025-04-12T08:00:00Z').toISOString(),
 		mood: 'neutral',
 		feelings: ['calm'],
 		journalEntry: 'Quiet day at home, reading and resting.',
@@ -112,7 +112,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-04-13T09:00:00Z'),
+		createdAt: new Date('2025-04-13T09:00:00Z').toISOString(),
 		mood: 'happy',
 		feelings: ['optimistic', 'confident'],
 		journalEntry: 'Had a productive morning cleaning and organizing.',
@@ -120,7 +120,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-04-14T10:00:00Z'),
+		createdAt: new Date('2025-04-14T10:00:00Z').toISOString(),
 		mood: 'very-sad',
 		feelings: ['down', 'tired'],
 		journalEntry: 'Rough night of sleep. Need support and rest.',
@@ -128,7 +128,7 @@ export const SAMPLE_MOOD_ENTRIES: MoodEntry[] = [
 	},
 	{
 		id: '',
-		createdAt: new Date('2025-04-15T11:00:00Z'),
+		createdAt: new Date('2025-04-15T11:00:00Z').toISOString(),
 		mood: 'very-happy',
 		feelings: ['grateful', 'optimistic'],
 		journalEntry: 'Woke up early and finally tackled a big project!',

@@ -14,6 +14,7 @@ interface AppState {
 	setTodaysMood: (mood: MoodEntry | null) => void;
 
 	moodsHistory: MoodEntry[];
+	setMoodsHistory: (moods: MoodEntry[]) => void;
 	addMoodEntry: (entry: MoodEntry) => void;
 	editMoodEntry: (entryId: string, updates: Partial<MoodEntry>) => void;
 	deleteMoodEntry: (entryId: string) => void;
@@ -40,6 +41,8 @@ export const useAppStore = create<AppState>()(
 
 			// Moods history
 			moodsHistory: [],
+
+			setMoodsHistory: (moods) => set({moodsHistory: moods}),
 
 			addMoodEntry: (entry) => set((state) => ({moodsHistory: [...state.moodsHistory, entry]})),
 

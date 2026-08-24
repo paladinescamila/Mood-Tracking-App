@@ -22,8 +22,5 @@ export const FEELINGS_DATA: Record<Feeling, {name: string}> = {
 };
 
 export const FEELINGS_OPTIONS: Option<Feeling>[] = Object.entries(FEELINGS_DATA).map(
-	([value, {name}]) => ({
-		value: value as Feeling,
-		label: name,
-	}),
+	([value, {name}]) => ({value: value as Feeling, label: name}),
 );

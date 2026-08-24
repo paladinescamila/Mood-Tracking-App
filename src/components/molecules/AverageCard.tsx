@@ -2,10 +2,11 @@ import BGPatterAverages from '@/assets/bg-pattern-averages.svg';
 import Icon from '@/components/atoms/Icon';
 
 interface AverageCardProps {
-	icon: React.ReactNode;
-	label: string;
-	trend: Trend;
+	icon?: React.ReactNode;
+	label?: string;
+	trend?: Trend;
 	textColor?: 'white' | 'black';
+	type?: 'mood' | 'sleep';
 	className?: string;
 }
 
@@ -14,11 +15,29 @@ export default function AverageCard({
 	label,
 	trend,
 	textColor = 'white',
+	type = 'mood',
 	className = '',
 }: AverageCardProps) {
+	if (!label || !trend)
+		return (
+			<div className='p-5 pr-15 rounded-[20px] flex flex-col justify-center gap-3 relative overflow-hidden w-full min-h-37.5 bg-blue-100'>
+				<p className='text-preset-4 text-neutral-900'>Keep tracking!</p>
+				<p className='text-preset-7 text-neutral-900'>
+					{type === 'mood'
+						? 'Log 5 check-ins to see your average mood.'
+						: 'Track 5 nights to view average sleep.'}
+				</p>
+				<img
+					src={BGPatterAverages}
+					alt='Background pattern for averages'
+					className='absolute top-1/2 -right-45 -translate-y-1/2'
+				/>
+			</div>
+		);
+
 	return (
 		<div
-			className={`p-5 pr-15 rounded-[20px] flex flex-col justify-center gap-3 relative overflow-hidden w-80 min-h-37.5 ${className}`}>
+			className={`p-5 pr-15 rounded-[20px] flex flex-col justify-center gap-3 relative overflow-hidden w-full min-h-37.5 ${className}`}>
 			<div className='flex flex-row gap-4 items-center'>
 				{icon}
 				<p

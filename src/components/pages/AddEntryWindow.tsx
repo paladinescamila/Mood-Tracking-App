@@ -9,9 +9,10 @@ import ErrorMessage from '@/components/atoms/ErrorMessage';
 import StepsProgress from '@/components/atoms/StepsProgress';
 import Button from '@/components/atoms/Button';
 import TextArea from '@/components/atoms/TextArea';
+import {generateID} from '@/utils/generateID';
 
 interface AddEntryWindowProps {
-	onSubmit?: (form: MoodEntryForm) => void;
+	onSubmit?: (newMoodEntry: MoodEntry) => void;
 	onClose?: () => void;
 }
 
@@ -53,7 +54,16 @@ export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps)
 			setError(null);
 			setStep((prev) => prev + 1);
 		} else {
-			onSubmit?.(form);
+			const newMoodEntry: MoodEntry = {
+				id: generateID(),
+				createdAt: new Date().toISOString(),
+				mood: form.mood!,
+				feelings: form.feelings,
+				journalEntry: form.journalEntry,
+				sleepHours: form.sleepHours!,
+			};
+
+			onSubmit?.(newMoodEntry);
 			onClose?.();
 		}
 	};

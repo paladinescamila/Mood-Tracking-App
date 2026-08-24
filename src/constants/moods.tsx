@@ -13,6 +13,14 @@ export const MOODS_DATA: Record<
 	'very-sad': {name: 'Very Sad', color: 1, value: 1, bgClass: 'bg-red-300'},
 };
 
+export const MOODS_VALUES: Record<Mood, number> = MOODS.reduce(
+	(acc, mood) => {
+		acc[mood] = MOODS_DATA[mood].value;
+		return acc;
+	},
+	{} as Record<Mood, number>,
+);
+
 export const MOODS_OPTIONS: Option<Mood>[] = Object.entries(MOODS_DATA).map(([key, value]) => ({
 	label: value.name,
 	value: key as Mood,

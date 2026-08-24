@@ -1,6 +1,6 @@
 type MoodEntry = {
 	id: string;
-	createdAt: Date;
+	createdAt: string;
 	mood: Mood;
 	feelings: Feeling[];
 	journalEntry: string;
