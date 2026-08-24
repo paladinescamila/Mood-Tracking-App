@@ -11,13 +11,13 @@ export default function Signup() {
 		<NoUser title='Create an account' subtitle='Join to track your daily mood and sleep with ease.'>
 			<form className='flex flex-col gap-5'>
 				<Input
-					value={email}
-					onChange={setEmail}
 					label='Email address'
 					placeholder='name@mail.com'
+					value={email}
+					onChange={setEmail}
 				/>
 
-				<Input value={password} onChange={setPassword} label='Password' placeholder='' />
+				<Input label='Password' value={password} onChange={setPassword} />
 			</form>
 
 			<footer className='flex flex-col gap-5'>

@@ -65,18 +65,18 @@ export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps)
 			{step === 1 && (
 				<Select
 					label='How was your mood today?'
+					options={MOODS_OPTIONS}
 					value={form.mood}
 					onChange={(mood) => onChange({mood})}
-					options={MOODS_OPTIONS}
 				/>
 			)}
 			{step === 2 && (
 				<MultiSelect
 					label='How did you feel?'
 					description='Select up to three tags:'
+					options={FEELINGS_OPTIONS}
 					value={form.feelings}
 					onChange={(feelings) => onChange({feelings})}
-					options={FEELINGS_OPTIONS}
 				/>
 			)}
 			{step === 3 && (
@@ -90,9 +90,9 @@ export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps)
 			{step === 4 && (
 				<Select
 					label='How many hours did you sleep last night?'
+					options={SLEEP_HOURS_OPTIONS}
 					value={form.sleepHours}
 					onChange={(sleepHours) => onChange({sleepHours})}
-					options={SLEEP_HOURS_OPTIONS}
 				/>
 			)}
 			<div className='flex flex-col gap-4'>

@@ -14,7 +14,7 @@ export default function Onboarding() {
 			subtitle='Add your name and a profile picture to make Mood yours.'>
 			<form className='flex flex-col gap-8'>
 				<div className='flex flex-col gap-6'>
-					<Input value={name} onChange={setName} label='Name' placeholder='Jane Appleseed' />
+					<Input label='Name' placeholder='Jane Appleseed' value={name} onChange={setName} />
 					<UploadImage value={photo} onChange={setPhoto} />
 				</div>
 

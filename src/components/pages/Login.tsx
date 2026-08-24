@@ -12,13 +12,13 @@ export default function Login() {
 		<NoUser title='Welcome back!' subtitle=' Log in to continue tracking your mood and sleep.'>
 			<form className='flex flex-col gap-5'>
 				<Input
-					value={email}
-					onChange={setEmail}
 					label='Email address'
 					placeholder='name@mail.com'
+					value={email}
+					onChange={setEmail}
 				/>
 
-				<Input value={password} onChange={setPassword} label='Password' placeholder='' />
+				<Input label='Password' value={password} onChange={setPassword} />
 			</form>
 
 			<footer className='flex flex-col gap-5'>
