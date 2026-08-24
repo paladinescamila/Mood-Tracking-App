@@ -1,8 +1,10 @@
 import {useState} from 'react';
+import {useAppStore} from '@/stores/app';
+import {useNavigate} from 'react-router-dom';
 import Logo from '@/components/atoms/Logo';
 import ProfileMenu from '@/components/organisms/ProfileMenu';
 import Screen from '@/components/atoms/Screen';
-import {SAMPLE_USER, SAMPLE_MOOD_ENTRY, SAMPLE_MOOD_ENTRIES} from '@/constants/sampleData';
+import {SAMPLE_MOOD_ENTRY, SAMPLE_MOOD_ENTRIES} from '@/constants/sampleData';
 import Button from '@/components/atoms/Button';
 import Card from '@/components/atoms/Card';
 import {MOODS_DATA} from '@/constants/moods';
@@ -17,18 +19,27 @@ import AddEntryWindow from '@/components/pages/AddEntryWindow';
 export default function Dashboard() {
 	const [showAddEntryWindow, setShowAddEntryWindow] = useState<boolean>(false);
 
+	const {user} = useAppStore();
+
 	const onSubmitNewMoodEntry = (form: MoodEntryForm) => {
 		console.log('New mood entry submitted:', form);
 	};
+
+	const navigate = useNavigate();
+
+	if (!user) {
+		navigate('/login');
+		return;
+	}
 
 	return (
 		<Screen className='pt-10 pb-20 gap-8'>
 			<header className='flex flex-row gap-16 items-center justify-between w-full'>
 				<Logo />
-				<ProfileMenu user={SAMPLE_USER} />
+				<ProfileMenu user={user} />
 			</header>
 			<section className='flex flex-col items-center gap-2.5'>
-				<h1 className='text-preset-3 text-blue-600'>Hello, {SAMPLE_USER.name}!</h1>
+				<h1 className='text-preset-3 text-blue-600'>Hello, {user.name}!</h1>
 				<h2 className='text-preset-1 text-neutral-900'>How are you feeling today?</h2>
 				<p className='text-preset-6 text-neutral-600'>{getDateText(new Date())}</p>
 			</section>

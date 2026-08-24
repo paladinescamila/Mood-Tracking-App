@@ -1,13 +1,15 @@
 import {useRef} from 'react';
 import Photo from '@/components/atoms/Photo';
 import Button from '@/components/atoms/Button';
+import ErrorMessage from '@/components/atoms/ErrorMessage';
 
 interface UploadImageProps {
 	value: File | null;
 	onChange: (value: File) => void;
+	error?: string;
 }
 
-export default function UploadImage({value = null, onChange}: UploadImageProps) {
+export default function UploadImage({value = null, onChange, error}: UploadImageProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const src = value ? URL.createObjectURL(value) : undefined;
@@ -36,6 +38,7 @@ export default function UploadImage({value = null, onChange}: UploadImageProps) 
 				<Button type='secondary' onClick={() => inputRef.current?.click()}>
 					Upload
 				</Button>
+				{error ? <ErrorMessage error={error} /> : null}
 			</div>
 		</div>
 	);

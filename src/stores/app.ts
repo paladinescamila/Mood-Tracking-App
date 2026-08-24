@@ -1,6 +1,11 @@
 import {create} from 'zustand';
+import {persist, createJSONStorage} from 'zustand/middleware';
+import type {FirebaseUser} from '@/firebase/config';
 
 interface AppState {
+	authUser: FirebaseUser | null;
+	setAuthUser: (authUser: FirebaseUser | null) => void;
+
 	user: User | null;
 	setUser: (user: User | null) => void;
 	updateUser: (updates: Pick<User, 'name' | 'photo'>) => void;
@@ -14,32 +19,45 @@ interface AppState {
 	deleteMoodEntry: (entryId: string) => void;
 }
 
-export const useAppStore = create<AppState>((set) => ({
-	// User
-	user: null,
+export const useAppStore = create<AppState>()(
+	persist(
+		(set) => ({
+			// User
+			authUser: null,
+			setAuthUser: (authUser) => set({authUser}),
 
-	setUser: (user) => set({user}),
+			user: null,
 
-	updateUser: (updates) =>
-		set((state) => ({user: state.user ? {...state.user, ...updates} : null})),
+			setUser: (user) => set({user}),
 
-	// Today's mood
-	todaysMood: null,
+			updateUser: (updates) =>
+				set((state) => ({user: state.user ? {...state.user, ...updates} : null})),
 
-	setTodaysMood: (mood) => set({todaysMood: mood}),
+			// Today's mood
+			todaysMood: null,
 
-	// Moods history
-	moodsHistory: [],
+			setTodaysMood: (mood) => set({todaysMood: mood}),
 
-	addMoodEntry: (entry) => set((state) => ({moodsHistory: [...state.moodsHistory, entry]})),
+			// Moods history
+			moodsHistory: [],
 
-	editMoodEntry: (entryId, updates) =>
-		set((state) => ({
-			moodsHistory: state.moodsHistory.map((entry) =>
-				entry.id === entryId ? {...entry, ...updates} : entry,
-			),
-		})),
+			addMoodEntry: (entry) => set((state) => ({moodsHistory: [...state.moodsHistory, entry]})),
 
-	deleteMoodEntry: (entryId) =>
-		set((state) => ({moodsHistory: state.moodsHistory.filter((entry) => entry.id !== entryId)})),
-}));
+			editMoodEntry: (entryId, updates) =>
+				set((state) => ({
+					moodsHistory: state.moodsHistory.map((entry) =>
+						entry.id === entryId ? {...entry, ...updates} : entry,
+					),
+				})),
+
+			deleteMoodEntry: (entryId) =>
+				set((state) => ({
+					moodsHistory: state.moodsHistory.filter((entry) => entry.id !== entryId),
+				})),
+		}),
+		{
+			name: 'app-storage',
+			storage: createJSONStorage(() => localStorage),
+		},
+	),
+);
