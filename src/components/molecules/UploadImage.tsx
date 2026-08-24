@@ -2,13 +2,12 @@ import {useRef} from 'react';
 import Photo from '@/components/atoms/Photo';
 import Button from '@/components/atoms/Button';
 
-export default function UploadImage({
-	value = null,
-	onChange,
-}: {
+interface UploadImageProps {
 	value: File | null;
 	onChange: (value: File) => void;
-}) {
+}
+
+export default function UploadImage({value = null, onChange}: UploadImageProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const src = value ? URL.createObjectURL(value) : undefined;

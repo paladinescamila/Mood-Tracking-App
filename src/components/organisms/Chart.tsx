@@ -1,12 +1,16 @@
-import Card from '@/components/atoms/Card';
-import {SLEEP_HOURS} from '@/constants/sleepHours';
-import Icon from '@/components/atoms/Icon';
-import MoodIcon from '@/components/atoms/MoodIcon';
 import {MOODS_DATA} from '@/constants/moods';
 import {getDateSplitted} from '@/utils/getDateSplitted';
 import {MONTHS} from '@/constants/time';
+import {SLEEP_HOURS} from '@/constants/sleepHours';
+import Card from '@/components/atoms/Card';
+import Icon from '@/components/atoms/Icon';
+import MoodIcon from '@/components/atoms/MoodIcon';
 
-export default function Chart({moods}: {moods: MoodEntry[]}) {
+interface ChartProps {
+	moods: MoodEntry[];
+}
+
+export default function Chart({moods}: ChartProps) {
 	return (
 		<Card className='gap-8 w-max'>
 			<h2 className='text-preset-3 text-neutral-900'>Mood and sleep trends</h2>

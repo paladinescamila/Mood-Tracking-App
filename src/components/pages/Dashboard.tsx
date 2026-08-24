@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import Logo from '@/components/atoms/Logo';
 import ProfileMenu from '@/components/organisms/ProfileMenu';
 import Screen from '@/components/atoms/Screen';
@@ -11,8 +12,15 @@ import {getDateText} from '@/utils/getDateText';
 import {FEELINGS_DATA} from '@/constants/feelings';
 import Averages from '@/components/organisms/Averages';
 import Chart from '@/components/organisms/Chart';
+import AddEntryWindow from '@/components/pages/AddEntryWindow';
 
 export default function Dashboard() {
+	const [showAddEntryWindow, setShowAddEntryWindow] = useState<boolean>(false);
+
+	const onSubmitNewMoodEntry = (form: MoodEntryForm) => {
+		console.log('New mood entry submitted:', form);
+	};
+
 	return (
 		<Screen className='pt-10 pb-20 gap-8'>
 			<header className='flex flex-row gap-16 items-center justify-between w-full'>
@@ -24,7 +32,9 @@ export default function Dashboard() {
 				<h2 className='text-preset-1 text-neutral-900'>How are you feeling today?</h2>
 				<p className='text-preset-6 text-neutral-600'>{getDateText(new Date())}</p>
 			</section>
-			<Button className='self-center'>Log today's mood</Button>
+			<Button className='self-center' onClick={() => setShowAddEntryWindow(true)}>
+				Log today's mood
+			</Button>
 
 			<section className='grid grid-cols-[670px_1fr] grid-rows-[max-content_1fr] gap-x-8 gap-y-5 mt-8'>
 				<Card className='relative min-w-167.5 h-85 overflow-hidden flex flex-col justify-between row-span-2'>
@@ -72,6 +82,13 @@ export default function Dashboard() {
 				<Averages mood='neutral' moodTrend='increase' sleepHours='5-6' sleepHoursTrend='decrease' />
 				<Chart moods={SAMPLE_MOOD_ENTRIES} />
 			</section>
+
+			{showAddEntryWindow && (
+				<AddEntryWindow
+					onSubmit={onSubmitNewMoodEntry}
+					onClose={() => setShowAddEntryWindow(false)}
+				/>
+			)}
 		</Screen>
 	);
 }

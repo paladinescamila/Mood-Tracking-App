@@ -1,21 +1,18 @@
+import {AVERAGES_LAST_CHECKINS} from '@/constants/dashboard';
+import {MOODS_DATA} from '@/constants/moods';
 import Card from '@/components/atoms/Card';
 import Icon from '@/components/atoms/Icon';
 import AverageCard from '@/components/molecules/AverageCard';
 import MoodIcon from '@/components/atoms/MoodIcon';
-import {AVERAGES_LAST_CHECKINS} from '@/constants/dashboard';
-import {MOODS_DATA} from '@/constants/moods';
 
-export default function Averages({
-	mood,
-	moodTrend,
-	sleepHours,
-	sleepHoursTrend,
-}: {
+interface AveragesProps {
 	mood?: Mood;
 	moodTrend?: Trend;
 	sleepHours?: SleepHours;
 	sleepHoursTrend?: Trend;
-}) {
+}
+
+export default function Averages({mood, moodTrend, sleepHours, sleepHoursTrend}: AveragesProps) {
 	if (!mood || !sleepHours || !moodTrend || !sleepHoursTrend) {
 		return null;
 	}

@@ -1,5 +1,4 @@
 import {useState} from 'react';
-
 import NoUser from '@/components/templates/NoUser';
 import Input from '@/components/atoms/Input';
 import Button from '@/components/atoms/Button';

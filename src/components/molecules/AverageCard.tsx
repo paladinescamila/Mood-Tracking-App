@@ -1,19 +1,21 @@
 import BGPatterAverages from '@/assets/bg-pattern-averages.svg';
 import Icon from '@/components/atoms/Icon';
 
+interface AverageCardProps {
+	icon: React.ReactNode;
+	label: string;
+	trend: Trend;
+	textColor?: 'white' | 'black';
+	className?: string;
+}
+
 export default function AverageCard({
 	icon,
 	label,
 	trend,
 	textColor = 'white',
 	className = '',
-}: {
-	icon: React.ReactNode;
-	label: string;
-	trend: Trend;
-	textColor?: 'white' | 'black';
-	className?: string;
-}) {
+}: AverageCardProps) {
 	return (
 		<div
 			className={`p-5 pr-15 rounded-[20px] flex flex-col justify-center gap-3 relative overflow-hidden w-80 min-h-37.5 ${className}`}>

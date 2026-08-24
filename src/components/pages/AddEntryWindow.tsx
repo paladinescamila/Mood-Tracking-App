@@ -10,7 +10,12 @@ import StepsProgress from '@/components/atoms/StepsProgress';
 import Button from '@/components/atoms/Button';
 import TextArea from '@/components/atoms/TextArea';
 
-export default function AddEntryWindow() {
+interface AddEntryWindowProps {
+	onSubmit?: (form: MoodEntryForm) => void;
+	onClose?: () => void;
+}
+
+export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps) {
 	const [step, setStep] = useState<number>(1);
 
 	const [form, setForm] = useState<MoodEntryForm>({
@@ -48,12 +53,13 @@ export default function AddEntryWindow() {
 			setError(null);
 			setStep((prev) => prev + 1);
 		} else {
-			console.log(form);
+			onSubmit?.(form);
+			onClose?.();
 		}
 	};
 
 	return (
-		<Window className='flex flex-col gap-8'>
+		<Window className='flex flex-col gap-8' onClose={onClose}>
 			<h1 className='text-preset-3 md:text-preset-2 text-neutral-900'>Log your mood</h1>
 			<StepsProgress progress={step} total={4} />
 			{step === 1 && (

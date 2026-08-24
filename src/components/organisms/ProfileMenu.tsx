@@ -2,7 +2,11 @@ import {useState} from 'react';
 import Icon from '@/components/atoms/Icon';
 import Photo from '@/components/atoms/Photo';
 
-export default function ProfileMenu({user}: {user: User}) {
+interface ProfileMenuProps {
+	user: User;
+}
+
+export default function ProfileMenu({user}: ProfileMenuProps) {
 	const [menuIsOpened, setMenuIsOpened] = useState(false);
 
 	return (
