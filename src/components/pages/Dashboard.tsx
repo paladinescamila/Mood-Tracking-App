@@ -9,23 +9,12 @@ import {getDateText} from '@/utils/getDateText';
 import Averages from '@/components/organisms/Averages';
 import Chart from '@/components/organisms/Chart';
 import AddEntryWindow from '@/components/organisms/AddEntryWindow';
-import {addUserMood} from '@/firebase/firestore';
 import TodaysMood from '@/components/organisms/TodaysMood';
 import {useLoadData} from '@/hooks/useLoadData';
 
 export default function Dashboard() {
-	const {user, todaysMood, setTodaysMood, addMoodEntry} = useAppStore();
-
+	const {user, todaysMood} = useAppStore();
 	const [showAddEntryWindow, setShowAddEntryWindow] = useState<boolean>(false);
-
-	const onSubmitNewMoodEntry = async (newMoodEntry: MoodEntry) => {
-		setTodaysMood(newMoodEntry);
-		addMoodEntry(newMoodEntry);
-
-		setShowAddEntryWindow(false);
-
-		await addUserMood(user!.id, newMoodEntry);
-	};
 
 	useLoadData();
 
@@ -61,12 +50,7 @@ export default function Dashboard() {
 				<Chart />
 			</section>
 
-			{showAddEntryWindow && (
-				<AddEntryWindow
-					onSubmit={onSubmitNewMoodEntry}
-					onClose={() => setShowAddEntryWindow(false)}
-				/>
-			)}
+			{showAddEntryWindow && <AddEntryWindow onClose={() => setShowAddEntryWindow(false)} />}
 		</Screen>
 	);
 }

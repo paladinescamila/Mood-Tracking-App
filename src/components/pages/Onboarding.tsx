@@ -14,6 +14,7 @@ export default function Onboarding() {
 
 	const [form, setForm] = useState<{name: string; photo: File | null}>({name: '', photo: null});
 	const [errors, setErrors] = useState<{name?: string; photo?: string; button?: string}>({});
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const onChangeName = (name: string) => {
 		setForm((prev) => ({...prev, name}));
@@ -36,6 +37,8 @@ export default function Onboarding() {
 		}
 
 		try {
+			setLoading(true);
+
 			if (authUser) {
 				const newUser: User = {
 					id: authUser.uid,
@@ -51,6 +54,8 @@ export default function Onboarding() {
 		} catch (error) {
 			console.error('Error creating user:', error);
 			setErrors((prev) => ({...prev, button: 'Failed to create account. Please try again.'}));
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -82,7 +87,7 @@ export default function Onboarding() {
 
 				<div className='flex flex-col gap-3'>
 					{errors.button ? <ErrorMessage error={errors.button} /> : null}
-					<Button className='w-full' onClick={handleStart}>
+					<Button className='w-full' onClick={handleStart} loading={loading} disabled={loading}>
 						Start Tracking
 					</Button>
 				</div>

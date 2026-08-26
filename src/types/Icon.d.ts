@@ -10,4 +10,5 @@ type Icon =
 	| 'settings'
 	| 'check'
 	| 'close'
-	| 'hint';
+	| 'hint'
+	| 'dots';

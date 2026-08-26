@@ -1,3 +1,5 @@
+import {useMemo} from 'react';
+import {getRandomMoodQuote} from '@/utils/getRandomMoodQuote';
 import {useAppStore} from '@/stores/app';
 import Card from '@/components/atoms/Card';
 import Icon from '@/components/atoms/Icon';
@@ -7,6 +9,8 @@ import {FEELINGS_DATA} from '@/constants/feelings';
 
 export default function TodaysMood() {
 	const {todaysMood} = useAppStore();
+
+	const moodQuote = useMemo(() => getRandomMoodQuote(todaysMood?.mood || 'neutral'), [todaysMood]);
 
 	if (!todaysMood) {
 		return null;
@@ -21,9 +25,7 @@ export default function TodaysMood() {
 				</div>
 				<div className='flex flex-col gap-3'>
 					<Icon icon='quote' className='w-6 h-6' />
-					<p className='text-preset-6-italic text-neutral-900 w-60'>
-						When your heart is full, share your light with the world.
-					</p>
+					<p className='text-preset-6-italic text-neutral-900 w-60'>{moodQuote}</p>
 				</div>
 				<MoodIcon mood={todaysMood.mood} className='absolute w-80 h-80 top-12.5 right-10' />
 			</Card>

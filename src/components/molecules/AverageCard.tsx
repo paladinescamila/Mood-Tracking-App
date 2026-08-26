@@ -54,6 +54,7 @@ export default function AverageCard({
 								? 'trend-decrease'
 								: 'trend-same'
 					}
+					color={type === 'sleep' ? 'white' : 'original'}
 					className='w-4 h-5'
 				/>
 				<p

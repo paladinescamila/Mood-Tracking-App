@@ -13,10 +13,6 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 
 	const {ref} = useClickOutside(() => setMenuIsOpened(false));
 
-	const handleLogout = async () => {
-		await logout();
-	};
-
 	return (
 		<div className='relative'>
 			<button
@@ -38,9 +34,7 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 					<Icon icon='settings' />
 					<p className='text-preset-7 text-neutral-900'>Settings</p>
 				</button>
-				<button
-					className='flex flex-row gap-2.5 cursor-pointer hover:opacity-70'
-					onClick={handleLogout}>
+				<button className='flex flex-row gap-2.5 cursor-pointer hover:opacity-70' onClick={logout}>
 					<Icon icon='logout' />
 					<p className='text-preset-7 text-neutral-900'>Logout</p>
 				</button>

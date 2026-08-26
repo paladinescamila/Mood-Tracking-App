@@ -14,6 +14,7 @@ export default function Login() {
 
 	const [form, setForm] = useState<{email: string; password: string}>({email: '', password: ''});
 	const [errors, setErrors] = useState<{email?: string; password?: string; button?: string}>({});
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const onChangeEmail = (email: string) => {
 		setForm((prev) => ({...prev, email}));
@@ -41,6 +42,8 @@ export default function Login() {
 		}
 
 		try {
+			setLoading(true);
+
 			const authUser = await signIn(email, password);
 			const firestoreUser = await getUser(authUser.uid);
 
@@ -63,6 +66,8 @@ export default function Login() {
 				console.error('Error signing in:', error);
 				setErrors((prev) => ({...prev, button: 'Failed to sign in. Please try again.'}));
 			}
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -95,7 +100,7 @@ export default function Login() {
 			<footer className='flex flex-col gap-5'>
 				<div className='flex flex-col gap-3'>
 					{errors.button ? <ErrorMessage error={errors.button} /> : null}
-					<Button className='w-full' onClick={handleLogin}>
+					<Button className='w-full' onClick={handleLogin} loading={loading} disabled={loading}>
 						Log In
 					</Button>
 				</div>

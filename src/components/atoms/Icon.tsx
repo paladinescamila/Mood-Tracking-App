@@ -10,6 +10,7 @@ import SettingsIcon from '@/assets/icon-settings.svg';
 import CheckIcon from '@/assets/icon-check.svg';
 import CloseIcon from '@/assets/icon-close.svg';
 import HintIcon from '@/assets/icon-hint.svg';
+import DotsIcon from '@/assets/icon-dots.svg';
 
 const ICONS: Record<Icon, string> = {
 	'trend-same': TrendSameIcon,
@@ -24,12 +25,24 @@ const ICONS: Record<Icon, string> = {
 	check: CheckIcon,
 	close: CloseIcon,
 	hint: HintIcon,
+	dots: DotsIcon,
 };
 
 interface IconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 	icon: Icon;
+	color?: 'original' | 'white';
 }
 
-export default function Icon({icon, ...props}: IconProps) {
-	return <img src={ICONS[icon]} alt={icon} {...props} />;
+export default function Icon({icon, color = 'original', ...props}: IconProps) {
+	return (
+		<img
+			src={ICONS[icon]}
+			alt={icon}
+			{...props}
+			style={{
+				...props.style,
+				filter: color === 'white' ? 'brightness(0) saturate(100%) invert(100%)' : 'none',
+			}}
+		/>
+	);
 }

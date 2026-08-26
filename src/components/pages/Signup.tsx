@@ -15,6 +15,7 @@ export default function Signup() {
 
 	const [form, setForm] = useState<{email: string; password: string}>({email: '', password: ''});
 	const [errors, setErrors] = useState<{email?: string; password?: string; button?: string}>({});
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const onChangeEmail = (email: string) => {
 		setForm((prev) => ({...prev, email}));
@@ -47,6 +48,8 @@ export default function Signup() {
 		}
 
 		try {
+			setLoading(true);
+
 			const authUser = await signUp(email, password);
 
 			setAuthUser(authUser);
@@ -76,6 +79,8 @@ export default function Signup() {
 
 			console.error('Error creating user:', error);
 			setErrors((prev) => ({...prev, button: 'Failed to create account. Please try again.'}));
+		} finally {
+			setLoading(false);
 		}
 	};
 
@@ -106,7 +111,7 @@ export default function Signup() {
 			<footer className='flex flex-col gap-5'>
 				<div className='flex flex-col gap-3'>
 					{errors.button ? <ErrorMessage error={errors.button} /> : null}
-					<Button className='w-full' onClick={handleSignup}>
+					<Button className='w-full' onClick={handleSignup} loading={loading} disabled={loading}>
 						Sign Up
 					</Button>
 				</div>

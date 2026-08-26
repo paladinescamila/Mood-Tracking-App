@@ -1,8 +1,12 @@
+import Icon from '@/components/atoms/Icon';
+
 interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type'> {
 	children: React.ReactNode;
 	type?: 'primary' | 'secondary';
 	className?: string;
 	disabled?: boolean;
+	loading?: boolean;
+	ref?: React.Ref<HTMLButtonElement>;
 }
 
 export default function Button({
@@ -10,14 +14,27 @@ export default function Button({
 	type = 'primary',
 	className = '',
 	disabled,
+	loading = false,
+	ref,
 	...props
 }: ButtonProps) {
 	return (
 		<button
-			className={`${type === 'primary' ? 'px-8 py-3 rounded-xl text-preset-5 text-neutral-0 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-200' : 'px-4 py-2 rounded-lg bg-neutral-0 text-preset-6 text-neutral-900 border border-neutral-300 hover:border-neutral-900 disabled:text-neutral-300 disabled:border-neutral-300'} custom-outline cursor-pointer disabled:cursor-not-allowed select-none ${className}`}
-			{...props}
-			disabled={disabled}>
+			className={`${type === 'primary' ? 'px-8 py-3 rounded-xl text-preset-5 text-neutral-0 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-200' : 'px-4 py-2 rounded-lg bg-neutral-0 text-preset-6 text-neutral-900 border border-neutral-300 hover:border-neutral-900 disabled:text-neutral-300 disabled:border-neutral-300'} custom-outline cursor-pointer disabled:cursor-not-allowed select-none relative ${className}`}
+			disabled={disabled}
+			ref={ref}
+			{...props}>
 			{children}
+			{loading ? (
+				<span
+					className={`absolute inset-0 rounded-xl flex items-center justify-center ${type === 'primary' ? 'bg-blue-600' : 'bg-neutral-0'}`}>
+					<Icon
+						icon='dots'
+						color={type === 'primary' ? 'white' : 'original'}
+						className='w-7 h-7 animate-pulse'
+					/>
+				</span>
+			) : null}
 		</button>
 	);
 }

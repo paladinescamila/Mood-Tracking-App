@@ -1,7 +1,9 @@
-import {useState} from 'react';
+import {useRef, useState} from 'react';
 import {MOODS_OPTIONS} from '@/constants/moods';
 import {FEELINGS_OPTIONS} from '@/constants/feelings';
 import {SLEEP_HOURS_OPTIONS} from '@/constants/sleepHours';
+import {addUserMood} from '@/firebase/firestore';
+import {useAppStore} from '@/stores/app';
 import Window from '@/components/atoms/Window';
 import Select from '@/components/molecules/Select';
 import MultiSelect from '@/components/molecules/MultiSelect';
@@ -12,13 +14,15 @@ import TextArea from '@/components/atoms/TextArea';
 import {generateID} from '@/utils/generateID';
 
 interface AddEntryWindowProps {
-	onSubmit?: (newMoodEntry: MoodEntry) => void;
 	onClose?: () => void;
 }
 
-export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps) {
+export default function AddEntryWindow({onClose}: AddEntryWindowProps) {
+	const {user, setTodaysMood, addMoodEntry} = useAppStore();
+
 	const [step, setStep] = useState<number>(1);
 	const [error, setError] = useState<string | null>(null);
+	const [saving, setSaving] = useState<boolean>(false);
 
 	const [form, setForm] = useState<MoodEntryForm>({
 		mood: null,
@@ -29,7 +33,9 @@ export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps)
 
 	const onChange = (fields: Partial<typeof form>) => setForm((prev) => ({...prev, ...fields}));
 
-	const onButtonClick = () => {
+	const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+	const onButtonClick = async () => {
 		if (step === 1 && !form.mood) {
 			setError('Please select a mood before continuing.');
 			return;
@@ -50,7 +56,10 @@ export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps)
 		if (step < 4) {
 			setError(null);
 			setStep((prev) => prev + 1);
+			buttonRef.current?.blur();
 		} else {
+			setSaving(true);
+
 			const newMoodEntry: MoodEntry = {
 				id: generateID(),
 				createdAt: new Date().toISOString(),
@@ -60,7 +69,12 @@ export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps)
 				sleepHours: form.sleepHours!,
 			};
 
-			onSubmit?.(newMoodEntry);
+			setTodaysMood(newMoodEntry);
+			addMoodEntry(newMoodEntry);
+
+			await addUserMood(user!.id, newMoodEntry);
+
+			setSaving(false);
 			onClose?.();
 		}
 	};
@@ -104,7 +118,12 @@ export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps)
 			)}
 			<div className='flex flex-col gap-4'>
 				{error ? <ErrorMessage error={error} /> : null}
-				<Button className='w-full' onClick={onButtonClick}>
+				<Button
+					className='w-full'
+					onClick={onButtonClick}
+					loading={saving}
+					disabled={saving}
+					ref={buttonRef}>
 					{step < 4 ? 'Continue' : 'Submit'}
 				</Button>
 			</div>
