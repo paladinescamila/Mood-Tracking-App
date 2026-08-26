@@ -8,7 +8,7 @@ import Button from '@/components/atoms/Button';
 import {getDateText} from '@/utils/getDateText';
 import Averages from '@/components/organisms/Averages';
 import Chart from '@/components/organisms/Chart';
-import AddEntryWindow from '@/components/pages/AddEntryWindow';
+import AddEntryWindow from '@/components/organisms/AddEntryWindow';
 import {addUserMood} from '@/firebase/firestore';
 import TodaysMood from '@/components/organisms/TodaysMood';
 import {useLoadData} from '@/hooks/useLoadData';
