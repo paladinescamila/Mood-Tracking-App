@@ -1,6 +1,8 @@
 import {useState} from 'react';
 import {useAppStore} from '@/stores/app';
 import {updateUser} from '@/firebase/firestore';
+import {uploadFile} from '@/firebase/storage';
+import {createUserPhotoURL} from '@/utils/createUserPhotoURL';
 import Input from '@/components/atoms/Input';
 import SubTitle from '@/components/atoms/SubTitle';
 import Title from '@/components/atoms/Title';
@@ -36,7 +38,7 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 	const handleSave = async () => {
 		setErrors({});
 
-		const {name} = form;
+		const {name, photo} = form;
 
 		if (!name) {
 			setErrors((prev) => ({...prev, name: 'Name is required.'}));
@@ -46,9 +48,20 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 		try {
 			setLoading(true);
 
+			let photoURL;
+
 			if (user) {
-				await updateUser(user.id, {name: name.trim()});
-				setUser({...user, name: name.trim()});
+				if (photo) {
+					if (photo.size / 1024 > 250) {
+						setErrors((prev) => ({...prev, photo: 'Image size exceeds 250KB.'}));
+						return;
+					}
+
+					photoURL = await uploadFile(photo, createUserPhotoURL(user.id, photo.name));
+				}
+
+				await updateUser(user.id, {name: name.trim(), photo: photoURL});
+				setUser({...user, name: name.trim(), photo: photoURL});
 			}
 
 			onClose?.();

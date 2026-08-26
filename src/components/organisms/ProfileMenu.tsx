@@ -10,8 +10,8 @@ interface ProfileMenuProps {
 }
 
 export default function ProfileMenu({user}: ProfileMenuProps) {
-	const [menuIsOpened, setMenuIsOpened] = useState(false);
-	const [settingsWindowIsOpened, setSettingsWindowIsOpened] = useState(false);
+	const [menuIsOpened, setMenuIsOpened] = useState<boolean>(false);
+	const [settingsWindowIsOpened, setSettingsWindowIsOpened] = useState<boolean>(false);
 
 	const {ref} = useClickOutside(() => setMenuIsOpened(false));
 

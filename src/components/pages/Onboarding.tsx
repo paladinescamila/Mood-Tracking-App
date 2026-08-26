@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useAppStore} from '@/stores/app';
 import {createUser} from '@/firebase/firestore';
+import {uploadFile} from '@/firebase/storage';
 import NoUser from '@/components/templates/NoUser';
 import Button from '@/components/atoms/Button';
 import UploadImage from '@/components/molecules/UploadImage';
@@ -29,7 +30,7 @@ export default function Onboarding() {
 	const handleStart = async () => {
 		setErrors({});
 
-		const {name} = form;
+		const {name, photo} = form;
 
 		if (!name) {
 			setErrors((prev) => ({...prev, name: 'Name is required.'}));
@@ -47,7 +48,16 @@ export default function Onboarding() {
 					photo: '',
 				};
 
-				createUser(newUser);
+				if (photo) {
+					if (photo.size / 1024 > 250) {
+						setErrors((prev) => ({...prev, photo: 'Image size exceeds 250KB.'}));
+						return;
+					}
+
+					newUser.photo = await uploadFile(photo, `users/${newUser.id}/${photo.name}`);
+				}
+
+				await createUser(newUser);
 				setUser(newUser);
 				navigate('/dashboard');
 			}

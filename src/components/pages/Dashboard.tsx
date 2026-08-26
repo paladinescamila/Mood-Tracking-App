@@ -32,7 +32,7 @@ export default function Dashboard() {
 				<ProfileMenu user={user} />
 			</header>
 			<section className='flex flex-col items-center gap-2.5'>
-				<h1 className='text-preset-3 text-blue-600'>Hello, {user.name}!</h1>
+				<h1 className='text-preset-3 text-blue-600'>Hello, {user.name.split(' ')[0]}!</h1>
 				<h2 className='text-preset-1 text-neutral-900'>How are you feeling today?</h2>
 				<p className='text-preset-6 text-neutral-600'>{getDateText(new Date())}</p>
 			</section>
