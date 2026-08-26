@@ -1,0 +1,84 @@
+import {useState} from 'react';
+import {useAppStore} from '@/stores/app';
+import {updateUser} from '@/firebase/firestore';
+import Input from '@/components/atoms/Input';
+import SubTitle from '@/components/atoms/SubTitle';
+import Title from '@/components/atoms/Title';
+import Window from '@/components/atoms/Window';
+import UploadImage from '@/components/molecules/UploadImage';
+import Button from '@/components/atoms/Button';
+
+interface SettingsWindowProps {
+	onClose?: () => void;
+}
+
+export default function SettingsWindow({onClose}: SettingsWindowProps) {
+	const {user, setUser} = useAppStore();
+
+	const [form, setForm] = useState<{name: string; photo: File | null}>({
+		name: user?.name || '',
+		photo: null,
+	});
+
+	const [errors, setErrors] = useState<{name?: string; photo?: string; button?: string}>({});
+	const [loading, setLoading] = useState<boolean>(false);
+
+	const onChangeName = (name: string) => {
+		setForm((prev) => ({...prev, name}));
+		setErrors((prev) => ({...prev, name: undefined}));
+	};
+
+	const onChangePhoto = (photo: File | null) => {
+		setForm((prev) => ({...prev, photo}));
+		setErrors((prev) => ({...prev, photo: undefined}));
+	};
+
+	const handleSave = async () => {
+		setErrors({});
+
+		const {name} = form;
+
+		if (!name) {
+			setErrors((prev) => ({...prev, name: 'Name is required.'}));
+			return;
+		}
+
+		try {
+			setLoading(true);
+
+			if (user) {
+				await updateUser(user.id, {name: name.trim()});
+				setUser({...user, name: name.trim()});
+			}
+
+			onClose?.();
+		} catch (error) {
+			console.error('Error updating user:', error);
+			setErrors((prev) => ({...prev, button: 'Failed to update account. Please try again.'}));
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	return (
+		<Window className='flex flex-col gap-8' backgroundClassName='bg-neutral-0' onClose={onClose}>
+			<div className='flex flex-col gap-2'>
+				<Title>Update your profile</Title>
+				<SubTitle>Personalize your account with your name and photo.</SubTitle>
+			</div>
+			<div className='flex flex-col gap-6'>
+				<Input
+					label='Name'
+					placeholder='Jane Appleseed'
+					value={form.name}
+					onChange={onChangeName}
+					error={errors.name}
+				/>
+				<UploadImage value={form.photo} onChange={onChangePhoto} error={errors.photo} />
+			</div>
+			<Button onClick={handleSave} loading={loading} disabled={loading}>
+				Save changes
+			</Button>
+		</Window>
+	);
+}

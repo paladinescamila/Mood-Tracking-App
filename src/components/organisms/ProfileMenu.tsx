@@ -1,8 +1,9 @@
 import {useState} from 'react';
 import {logout} from '@/firebase/auth';
+import {useClickOutside} from '@/hooks/useClickOutside';
 import Icon from '@/components/atoms/Icon';
 import Photo from '@/components/atoms/Photo';
-import {useClickOutside} from '@/hooks/useClickOutside';
+import SettingsWindow from '@/components/organisms/SettingsWindow';
 
 interface ProfileMenuProps {
 	user: User;
@@ -10,8 +11,14 @@ interface ProfileMenuProps {
 
 export default function ProfileMenu({user}: ProfileMenuProps) {
 	const [menuIsOpened, setMenuIsOpened] = useState(false);
+	const [settingsWindowIsOpened, setSettingsWindowIsOpened] = useState(false);
 
 	const {ref} = useClickOutside(() => setMenuIsOpened(false));
+
+	const handleOpenSettings = () => {
+		setMenuIsOpened(false);
+		setSettingsWindowIsOpened(true);
+	};
 
 	return (
 		<div className='relative'>
@@ -30,7 +37,9 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 					<p className='text-preset-7 text-neutral-300 truncate'>{user.email}</p>
 				</div>
 				<div className='w-full h-px bg-blue-100' />
-				<button className='flex flex-row gap-2.5 cursor-pointer hover:opacity-70'>
+				<button
+					className='flex flex-row gap-2.5 cursor-pointer hover:opacity-70'
+					onClick={handleOpenSettings}>
 					<Icon icon='settings' />
 					<p className='text-preset-7 text-neutral-900'>Settings</p>
 				</button>
@@ -39,6 +48,9 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 					<p className='text-preset-7 text-neutral-900'>Logout</p>
 				</button>
 			</div>
+			{settingsWindowIsOpened && (
+				<SettingsWindow onClose={() => setSettingsWindowIsOpened(false)} />
+			)}
 		</div>
 	);
 }

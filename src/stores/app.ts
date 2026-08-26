@@ -8,7 +8,6 @@ interface AppState {
 
 	user: User | null;
 	setUser: (user: User | null) => void;
-	updateUser: (updates: Pick<User, 'name' | 'photo'>) => void;
 
 	todaysMood: MoodEntry | null;
 	setTodaysMood: (mood: MoodEntry | null) => void;
@@ -30,9 +29,6 @@ export const useAppStore = create<AppState>()(
 			user: null,
 
 			setUser: (user) => set({user}),
-
-			updateUser: (updates) =>
-				set((state) => ({user: state.user ? {...state.user, ...updates} : null})),
 
 			// Today's mood
 			todaysMood: null,

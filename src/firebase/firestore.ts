@@ -26,6 +26,11 @@ export const createUser = async (user: User): Promise<void> => {
 	await setDoc(userDocRef, user);
 };
 
+export const updateUser = async (userID: string, updatedData: Partial<User>): Promise<void> => {
+	const userDocRef = doc(firestore, 'users', userID);
+	await setDoc(userDocRef, updatedData, {merge: true});
+};
+
 export const getUserMoods = async (userID: string): Promise<MoodEntry[]> => {
 	const moodsCollectionRef = collection(firestore, 'users', userID, 'moods');
 	const moodsSnapshot = await getDocs(moodsCollectionRef);
