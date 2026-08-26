@@ -18,8 +18,6 @@ export const useLoadData = () => {
 					const moodsHistory = await getUserMoods(authUser.uid);
 					setMoodsHistory(moodsHistory);
 
-					console.log('Moods history:', moodsHistory);
-
 					const today = new Date().toISOString().split('T')[0];
 					const todaysMood = moodsHistory.find((mood) => mood.createdAt.split('T')[0] === today);
 					setTodaysMood(todaysMood || null);

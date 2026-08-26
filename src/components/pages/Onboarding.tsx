@@ -9,11 +9,11 @@ import Input from '@/components/atoms/Input';
 import ErrorMessage from '@/components/atoms/ErrorMessage';
 
 export default function Onboarding() {
-	const [form, setForm] = useState<{name: string; photo: File | null}>({name: '', photo: null});
-	const [errors, setErrors] = useState<{name?: string; photo?: string; button?: string}>({});
-
 	const {authUser, user, setUser} = useAppStore();
 	const navigate = useNavigate();
+
+	const [form, setForm] = useState<{name: string; photo: File | null}>({name: '', photo: null});
+	const [errors, setErrors] = useState<{name?: string; photo?: string; button?: string}>({});
 
 	const onChangeName = (name: string) => {
 		setForm((prev) => ({...prev, name}));
@@ -27,27 +27,22 @@ export default function Onboarding() {
 
 	const handleStart = async () => {
 		setErrors({});
-		const {name} = form;
 
-		console.log('authUser:', authUser);
+		const {name} = form;
 
 		if (!name) {
 			setErrors((prev) => ({...prev, name: 'Name is required.'}));
 			return;
 		}
 
-		console.log('authUser:', authUser);
-
 		try {
 			if (authUser) {
 				const newUser: User = {
 					id: authUser.uid,
-					name: form.name.trim(),
+					name: name.trim(),
 					email: authUser.email || '',
 					photo: '',
 				};
-
-				console.log('Creating user:', newUser);
 
 				createUser(newUser);
 				setUser(newUser);

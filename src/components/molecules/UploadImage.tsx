@@ -19,12 +19,7 @@ export default function UploadImage({value = null, onChange, error}: UploadImage
 			<input
 				type='file'
 				accept='image/png, image/jpeg'
-				onChange={(e) => {
-					console.log(e.target.files?.[0]);
-					if (e.target.files && e.target.files.length > 0) {
-						onChange(e.target.files[0]);
-					}
-				}}
+				onChange={(e) => e.target.files && e.target.files.length > 0 && onChange(e.target.files[0])}
 				style={{display: 'none'}}
 				className='hidden'
 				ref={inputRef}

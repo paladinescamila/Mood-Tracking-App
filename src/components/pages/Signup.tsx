@@ -10,11 +10,11 @@ import Button from '@/components/atoms/Button';
 import ErrorMessage from '@/components/atoms/ErrorMessage';
 
 export default function Signup() {
-	const [form, setForm] = useState<{email: string; password: string}>({email: '', password: ''});
-	const [errors, setErrors] = useState<{email?: string; password?: string; button?: string}>({});
-
 	const {user, setUser, setAuthUser} = useAppStore();
 	const navigate = useNavigate();
+
+	const [form, setForm] = useState<{email: string; password: string}>({email: '', password: ''});
+	const [errors, setErrors] = useState<{email?: string; password?: string; button?: string}>({});
 
 	const onChangeEmail = (email: string) => {
 		setForm((prev) => ({...prev, email}));
@@ -28,6 +28,7 @@ export default function Signup() {
 
 	const handleSignup = async () => {
 		setErrors({});
+
 		const {email, password} = form;
 
 		if (!email) {
@@ -39,6 +40,7 @@ export default function Signup() {
 			setErrors((prev) => ({...prev, email: 'Invalid email format.'}));
 			return;
 		}
+
 		if (!password) {
 			setErrors((prev) => ({...prev, password: 'Password is required.'}));
 			return;
@@ -46,6 +48,7 @@ export default function Signup() {
 
 		try {
 			const authUser = await signUp(email, password);
+
 			setAuthUser(authUser);
 			navigate('/onboarding');
 		} catch (error: unknown) {
@@ -59,11 +62,13 @@ export default function Signup() {
 
 				if (firestoreUser) {
 					const authUser = await signIn(email, password);
+
 					setAuthUser(authUser);
 					setUser(firestoreUser);
 					navigate('/dashboard');
 				} else {
 					const authUser = await signIn(email, password);
+
 					setAuthUser(authUser);
 					navigate('/onboarding');
 				}
@@ -90,7 +95,6 @@ export default function Signup() {
 					error={errors.email}
 					type='email'
 				/>
-
 				<Input
 					label='Password'
 					value={form.password}
@@ -99,7 +103,6 @@ export default function Signup() {
 					type='password'
 				/>
 			</form>
-
 			<footer className='flex flex-col gap-5'>
 				<div className='flex flex-col gap-3'>
 					{errors.button ? <ErrorMessage error={errors.button} /> : null}

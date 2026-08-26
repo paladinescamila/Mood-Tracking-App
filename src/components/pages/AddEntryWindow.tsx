@@ -18,6 +18,7 @@ interface AddEntryWindowProps {
 
 export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps) {
 	const [step, setStep] = useState<number>(1);
+	const [error, setError] = useState<string | null>(null);
 
 	const [form, setForm] = useState<MoodEntryForm>({
 		mood: null,
@@ -26,11 +27,7 @@ export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps)
 		sleepHours: null,
 	});
 
-	const onChange = (fields: Partial<typeof form>) => {
-		setForm((prev) => ({...prev, ...fields}));
-	};
-
-	const [error, setError] = useState<string | null>(null);
+	const onChange = (fields: Partial<typeof form>) => setForm((prev) => ({...prev, ...fields}));
 
 	const onButtonClick = () => {
 		if (step === 1 && !form.mood) {
@@ -107,7 +104,6 @@ export default function AddEntryWindow({onSubmit, onClose}: AddEntryWindowProps)
 			)}
 			<div className='flex flex-col gap-4'>
 				{error ? <ErrorMessage error={error} /> : null}
-
 				<Button className='w-full' onClick={onButtonClick}>
 					{step < 4 ? 'Continue' : 'Submit'}
 				</Button>

@@ -14,17 +14,17 @@ import TodaysMood from '@/components/organisms/TodaysMood';
 import {useLoadData} from '@/hooks/useLoadData';
 
 export default function Dashboard() {
-	const [showAddEntryWindow, setShowAddEntryWindow] = useState<boolean>(false);
-
 	const {user, todaysMood, setTodaysMood, addMoodEntry} = useAppStore();
 
-	const onSubmitNewMoodEntry = (newMoodEntry: MoodEntry) => {
-		addUserMood(user!.id, newMoodEntry);
+	const [showAddEntryWindow, setShowAddEntryWindow] = useState<boolean>(false);
 
+	const onSubmitNewMoodEntry = async (newMoodEntry: MoodEntry) => {
 		setTodaysMood(newMoodEntry);
 		addMoodEntry(newMoodEntry);
 
 		setShowAddEntryWindow(false);
+
+		await addUserMood(user!.id, newMoodEntry);
 	};
 
 	useLoadData();

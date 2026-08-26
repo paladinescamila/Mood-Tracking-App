@@ -9,11 +9,11 @@ import NoUser from '@/components/templates/NoUser';
 import ErrorMessage from '@/components/atoms/ErrorMessage';
 
 export default function Login() {
-	const [form, setForm] = useState<{email: string; password: string}>({email: '', password: ''});
-	const [errors, setErrors] = useState<{email?: string; password?: string; button?: string}>({});
-
 	const {user, setUser, setAuthUser} = useAppStore();
 	const navigate = useNavigate();
+
+	const [form, setForm] = useState<{email: string; password: string}>({email: '', password: ''});
+	const [errors, setErrors] = useState<{email?: string; password?: string; button?: string}>({});
 
 	const onChangeEmail = (email: string) => {
 		setForm((prev) => ({...prev, email}));
@@ -27,6 +27,7 @@ export default function Login() {
 
 	const handleLogin = async () => {
 		setErrors({});
+
 		const {email, password} = form;
 
 		if (!email) {
@@ -44,7 +45,7 @@ export default function Login() {
 			const firestoreUser = await getUser(authUser.uid);
 
 			if (firestoreUser) {
-				setUser(await getUser(authUser.uid));
+				setUser(firestoreUser);
 				navigate('/dashboard');
 			} else {
 				setAuthUser(authUser);
