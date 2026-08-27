@@ -23,7 +23,9 @@ export default function Chart() {
 
 	return (
 		<Card className='gap-8 flex-1 min-w-0 overflow-hidden'>
-			<h2 className='text-preset-3 text-neutral-900'>Mood and sleep trends</h2>
+			<h2 className='text-preset-3-mobile md:text-preset-3 text-neutral-900'>
+				Mood and sleep trends
+			</h2>
 
 			<div className='relative flex w-full min-w-0'>
 				<div className='absolute inset-0 flex flex-col gap-10 pointer-events-none'>

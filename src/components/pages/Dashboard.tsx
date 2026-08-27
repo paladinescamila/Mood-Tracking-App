@@ -26,14 +26,18 @@ export default function Dashboard() {
 	}
 
 	return (
-		<Screen className='pt-10 pb-20 gap-8'>
+		<Screen className='pt-10 pb-20 gap-8 xl:px-8 2xl:px-33!'>
 			<header className='flex flex-row gap-16 items-center justify-between w-full'>
 				<Logo />
 				<ProfileMenu user={user} />
 			</header>
 			<section className='flex flex-col items-center gap-2.5'>
-				<h1 className='text-preset-3 text-blue-600'>Hello, {user.name.split(' ')[0]}!</h1>
-				<h2 className='text-preset-1 text-neutral-900'>How are you feeling today?</h2>
+				<h1 className='text-preset-3-mobile md:text-preset-3 text-blue-600 text-center'>
+					Hello, {user.name.split(' ')[0]}!
+				</h1>
+				<h2 className='text-preset-1-mobile md:text-preset-1 text-neutral-900 text-center'>
+					How are you feeling today?
+				</h2>
 				<p className='text-preset-6 text-neutral-600'>{getDateText(new Date())}</p>
 			</section>
 
@@ -45,7 +49,7 @@ export default function Dashboard() {
 				</Button>
 			)}
 
-			<section className='flex flex-row gap-8'>
+			<section className='flex flex-col xl:flex-row gap-8'>
 				<Averages />
 				<Chart />
 			</section>
