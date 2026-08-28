@@ -19,7 +19,7 @@ export const useLoadData = () => {
 					setMoodsHistory(moodsHistory);
 
 					const today = new Date().toISOString().split('T')[0];
-					const todaysMood = moodsHistory.find((mood) => mood.createdAt.split('T')[0] === today);
+					const todaysMood = moodsHistory.find((entry) => entry.createdAt.split('T')[0] === today);
 					setTodaysMood(todaysMood || null);
 				}
 			} else {
