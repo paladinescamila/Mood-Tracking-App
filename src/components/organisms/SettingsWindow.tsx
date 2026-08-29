@@ -1,8 +1,9 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useAppStore} from '@/stores/app';
 import {updateUser} from '@/firebase/firestore';
 import {uploadFile} from '@/firebase/storage';
 import {createUserPhotoURL} from '@/utils/createUserPhotoURL';
+import {createFileFromURL} from '@/utils/createFileFromURL';
 import Input from '@/components/atoms/Input';
 import SubTitle from '@/components/atoms/SubTitle';
 import Title from '@/components/atoms/Title';
@@ -34,6 +35,21 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 		setForm((prev) => ({...prev, photo}));
 		setErrors((prev) => ({...prev, photo: undefined}));
 	};
+
+	useEffect(() => {
+		const fetchUserPhoto = async (url: string) => {
+			try {
+				const file = await createFileFromURL(url, 'profile-photo');
+				setForm((prev) => ({...prev, photo: file}));
+			} catch (error) {
+				console.error('Error fetching user photo:', error);
+			}
+		};
+
+		if (user?.photo && !form.photo) {
+			fetchUserPhoto(user.photo);
+		}
+	}, [user?.photo, form.photo]);
 
 	const handleSave = async () => {
 		setErrors({});
