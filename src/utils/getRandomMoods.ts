@@ -18,11 +18,12 @@ export const getRandomMoods = (count: number): MoodEntry[] => {
 
 	const lastDays = Array.from({length: count}, (_, i) => {
 		const date = new Date();
+		date.setDate(date.getDate() - 1);
 		date.setDate(date.getDate() - (count - 1 - i));
 		return date.toISOString();
 	});
 
-	let randomMoodsEntries = randomMoods.map((mood, index) => ({
+	return randomMoods.map((mood, index) => ({
 		id: generateID(),
 		createdAt: lastDays[index],
 		mood,
@@ -30,10 +31,4 @@ export const getRandomMoods = (count: number): MoodEntry[] => {
 		journalEntry: 'This is a sample journal entry for testing purposes.',
 		sleepHours: SLEEP_HOURS[Math.floor(Math.random() * SLEEP_HOURS.length)],
 	}));
-
-	randomMoodsEntries = randomMoodsEntries.filter(
-		(entry) => entry.createdAt.split('T')[0] !== new Date().toISOString().split('T')[0],
-	);
-
-	return randomMoodsEntries;
 };
