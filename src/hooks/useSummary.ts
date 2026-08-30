@@ -15,8 +15,8 @@ export const useSummary = () => {
 		moodTrend: Trend | null;
 		sleepHoursTrend: Trend | null;
 	}>(() => {
-		// If there's no mood data
-		if (moodsHistory.length === 0) {
+		// If there's no enough mood data
+		if (moodsHistory.length < AVERAGES_LAST_CHECKINS) {
 			return {
 				averageMood: null,
 				averageSleepHours: null,

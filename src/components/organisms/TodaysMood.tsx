@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
 import {getRandomMoodQuote} from '@/utils/getRandomMoodQuote';
-import {useAppStore} from '@/stores/app';
+import {useTodaysMood} from '@/hooks/useTodaysMood';
 import Card from '@/components/atoms/Card';
 import Icon from '@/components/atoms/Icon';
 import MoodIcon from '@/components/atoms/MoodIcon';
@@ -8,7 +8,7 @@ import {MOODS_DATA} from '@/constants/moods';
 import {FEELINGS_DATA} from '@/constants/feelings';
 
 export default function TodaysMood() {
-	const {todaysMood} = useAppStore();
+	const {todaysMood} = useTodaysMood();
 
 	const moodQuote = useMemo(() => getRandomMoodQuote(todaysMood?.mood || 'neutral'), [todaysMood]);
 

@@ -4,7 +4,7 @@ import {auth} from '@/firebase/config';
 import {getUser, getUserMoods} from '@/firebase/firestore';
 
 export const useLoadData = () => {
-	const {setAuthUser, setUser, setTodaysMood, setMoodsHistory} = useAppStore();
+	const {setAuthUser, setUser, setMoodsHistory} = useAppStore();
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
@@ -17,15 +17,10 @@ export const useLoadData = () => {
 					setUser(userDoc);
 					const moodsHistory = await getUserMoods(authUser.uid);
 					setMoodsHistory(moodsHistory);
-
-					const today = new Date().toISOString().split('T')[0];
-					const todaysMood = moodsHistory.find((entry) => entry.createdAt.split('T')[0] === today);
-					setTodaysMood(todaysMood || null);
 				}
 			} else {
 				setAuthUser(null);
 				setUser(null);
-				setTodaysMood(null);
 				setMoodsHistory([]);
 			}
 		});

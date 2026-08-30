@@ -11,9 +11,11 @@ import Chart from '@/components/organisms/Chart';
 import AddEntryWindow from '@/components/organisms/AddEntryWindow';
 import TodaysMood from '@/components/organisms/TodaysMood';
 import {useLoadData} from '@/hooks/useLoadData';
+import {useTodaysMood} from '@/hooks/useTodaysMood';
 
 export default function Dashboard() {
-	const {user, todaysMood} = useAppStore();
+	const {user} = useAppStore();
+	const {todaysMood} = useTodaysMood();
 	const [showAddEntryWindow, setShowAddEntryWindow] = useState<boolean>(false);
 
 	useLoadData();

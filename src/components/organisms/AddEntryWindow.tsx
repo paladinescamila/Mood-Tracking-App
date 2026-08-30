@@ -18,7 +18,7 @@ interface AddEntryWindowProps {
 }
 
 export default function AddEntryWindow({onClose}: AddEntryWindowProps) {
-	const {user, setTodaysMood, addMoodEntry} = useAppStore();
+	const {user, addMoodEntry} = useAppStore();
 
 	const [step, setStep] = useState<number>(1);
 	const [error, setError] = useState<string | null>(null);
@@ -69,7 +69,6 @@ export default function AddEntryWindow({onClose}: AddEntryWindowProps) {
 				sleepHours: form.sleepHours!,
 			};
 
-			setTodaysMood(newMoodEntry);
 			addMoodEntry(newMoodEntry);
 
 			await addUserMood(user!.id, newMoodEntry);

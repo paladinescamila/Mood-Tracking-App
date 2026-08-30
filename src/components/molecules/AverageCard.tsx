@@ -22,7 +22,7 @@ export default function AverageCard({
 		return (
 			<div className='p-5 pr-15 rounded-[20px] flex flex-col justify-center gap-3 relative overflow-hidden w-full min-h-37.5 bg-blue-100'>
 				<p className='text-preset-4 text-neutral-900'>Keep tracking!</p>
-				<p className='text-preset-7 text-neutral-900'>
+				<p className='text-preset-7 text-neutral-900 opacity-70'>
 					{type === 'mood'
 						? 'Log 5 check-ins to see your average mood.'
 						: 'Track 5 nights to view average sleep.'}
