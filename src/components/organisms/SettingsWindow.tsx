@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useAppStore} from '@/stores/app';
 import {updateUser} from '@/firebase/firestore';
-import {uploadFile} from '@/firebase/storage';
+import {uploadFile, deleteFile} from '@/firebase/storage';
 import {createUserPhotoURL} from '@/utils/createUserPhotoURL';
 import {createFileFromURL} from '@/utils/createFileFromURL';
 import Input from '@/components/atoms/Input';
@@ -71,6 +71,10 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 					if (photo.size / 1024 > 250) {
 						setErrors((prev) => ({...prev, photo: 'Image size exceeds 250KB.'}));
 						return;
+					}
+
+					if (user.photo) {
+						await deleteFile(user.photo);
 					}
 
 					photoURL = await uploadFile(photo, createUserPhotoURL(user.id, photo.name));
