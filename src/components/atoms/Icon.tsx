@@ -31,13 +31,14 @@ const ICONS: Record<Icon, string> = {
 interface IconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 	icon: Icon;
 	color?: 'original' | 'white';
+	alt: string;
 }
 
-export default function Icon({icon, color = 'original', ...props}: IconProps) {
+export default function Icon({icon, color = 'original', alt, ...props}: IconProps) {
 	return (
 		<img
 			src={ICONS[icon]}
-			alt={icon}
+			alt={alt ?? `${icon} icon`}
 			{...props}
 			style={{
 				...props.style,

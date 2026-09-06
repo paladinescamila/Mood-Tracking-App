@@ -70,9 +70,9 @@ export default function AddEntryWindow({onClose}: AddEntryWindowProps) {
 					sleepHours: form.sleepHours!,
 				};
 
-				addMoodEntry(newMoodEntry);
-
 				await addUserMood(user!.id, newMoodEntry);
+
+				addMoodEntry(newMoodEntry);
 
 				onClose?.();
 			} catch (error) {

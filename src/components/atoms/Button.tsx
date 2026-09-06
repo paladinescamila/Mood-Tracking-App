@@ -35,6 +35,7 @@ export default function Button({
 					className={`absolute inset-0 rounded-xl flex items-center justify-center ${type === 'primary' ? 'bg-blue-600' : 'bg-neutral-0'}`}>
 					<Icon
 						icon='dots'
+						alt='Loading'
 						color={type === 'primary' ? 'white' : 'original'}
 						className='w-7 h-7 animate-pulse'
 					/>

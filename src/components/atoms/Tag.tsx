@@ -39,7 +39,7 @@ export default function Tag({
 			{controlType === 'checkbox' ? (
 				<div
 					className={`w-4 h-4 rounded-sm flex items-center justify-center border-[1.5px] ${checked ? 'border-blue-600 bg-blue-600' : 'border-blue-200'}`}>
-					{checked ? <Icon icon='check' /> : null}
+					{checked ? <Icon icon='check' alt='Checked' /> : null}
 				</div>
 			) : (
 				<div

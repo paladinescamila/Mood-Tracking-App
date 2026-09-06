@@ -56,6 +56,7 @@ export default function AverageCard({
 					}
 					color={type === 'sleep' ? 'white' : 'original'}
 					className='w-4 h-5'
+					alt='Trend icon'
 				/>
 				<p
 					className={`text-preset-7 ${textColor === 'white' ? 'text-neutral-0' : 'text-neutral-900'}`}>

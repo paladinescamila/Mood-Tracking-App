@@ -11,7 +11,7 @@ export default function ErrorMessage({error, className = '', id}: ErrorMessagePr
 
 	return (
 		<div id={id} role='alert' className={`flex flex-row items-center gap-1.5 ${className}`}>
-			<Icon icon='hint' />
+			<Icon icon='hint' alt='Error' />
 			<span className='text-red-700 text-preset-9'>{error}</span>
 		</div>
 	);

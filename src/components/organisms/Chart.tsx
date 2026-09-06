@@ -63,7 +63,7 @@ export default function Chart() {
 				<div className='absolute inset-0 flex flex-col gap-10 pointer-events-none'>
 					{SLEEP_HOURS_TO_SHOW.map((sleepHour) => (
 						<div key={sleepHour} className='relative flex flex-row items-center gap-1.5'>
-							<Icon icon='sleep' className='w-2.5 h-2.5 shrink-0' />
+							<Icon icon='sleep' className='w-2.5 h-2.5 shrink-0' alt='Sleep icon' />
 
 							<p className='text-preset-9 text-neutral-600 text-nowrap mr-3 shrink-0'>
 								{sleepHour}
@@ -81,6 +81,7 @@ export default function Chart() {
 						{renderedMoods.map((entry, index) => (
 							<div
 								key={index}
+								id={`chart-entry-${entry.id}`}
 								onMouseEnter={(event) => updateTooltipPlacement(index, event.currentTarget)}
 								onClick={(event) => toggleTooltip(index, event.currentTarget)}
 								onKeyDown={(event) => {
@@ -92,6 +93,7 @@ export default function Chart() {
 								role='button'
 								tabIndex={0}
 								aria-expanded={selectedTooltipIndex === index}
+								aria-controls={`chart-details-${entry.id}`}
 								aria-label={`Show details for ${getDateSplitted(entry.createdAt).month + 1}/${getDateSplitted(entry.createdAt).day}`}
 								className={`flex flex-col justify-end gap-2.5 shrink-0 relative group ${selectedTooltipIndex === index ? 'z-20' : 'z-10 hover:z-20'}`}>
 								<div
@@ -122,6 +124,10 @@ export default function Chart() {
 									</p>
 								</div>
 								<div
+									id={`chart-details-${entry.id}`}
+									role='region'
+									aria-labelledby={`chart-details-label-${entry.id}`}
+									aria-hidden={selectedTooltipIndex === index ? undefined : true}
 									className={`${selectedTooltipIndex === index ? 'flex' : 'hidden group-hover:flex'} absolute w-43 h-auto flex-col gap-3 p-3 rounded-[10px] bg-neutral-0 top-2 chart-tooltip-shadow ${
 										tooltipPlacements[index] === 'right'
 											? 'left-[calc(100%+8px)]'
@@ -130,7 +136,11 @@ export default function Chart() {
 												: 'right-[calc(100%+8px)]'
 									}`}>
 									<div className='flex flex-col gap-1.5'>
-										<p className='text-preset-8 text-neutral-600'>Mood</p>
+										<p
+											id={`chart-details-label-${entry.id}`}
+											className='text-preset-8 text-neutral-600'>
+											Mood details
+										</p>
 										<div className='flex flex-row gap-1.5'>
 											<MoodIcon mood={entry.mood} className='w-4 h-4' />
 											<p className='text-preset-7 text-neutral-900'>

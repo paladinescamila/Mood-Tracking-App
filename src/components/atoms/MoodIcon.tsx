@@ -23,5 +23,5 @@ interface MoodIconProps extends React.ImgHTMLAttributes<HTMLImageElement> {
 }
 
 export default function MoodIcon({mood, mode = 'color', ...props}: MoodIconProps) {
-	return <img src={MOOD_ICONS[mood][mode]} alt={mood} {...props} />;
+	return <img src={MOOD_ICONS[mood][mode]} alt={`Mood: ${mood}`} {...props} />;
 }

@@ -42,7 +42,7 @@ export default function Averages() {
 				<AverageCard
 					icon={
 						averageSleepHours ? (
-							<Icon icon='sleep' color='white' className='w-6 h-6 opacity-70' />
+							<Icon icon='sleep' color='white' className='w-6 h-6 opacity-70' alt='Sleep icon' />
 						) : undefined
 					}
 					label={averageSleepHours ? `${averageSleepHours} Hours` : undefined}

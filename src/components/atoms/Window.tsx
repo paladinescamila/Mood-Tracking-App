@@ -73,7 +73,7 @@ export default function Window({
 					aria-label='Close dialog'
 					className='absolute top-7.5 right-7.5 cursor-pointer'
 					onClick={onClose}>
-					<Icon icon='close' className='	w-3.75 h-3.75' />
+					<Icon icon='close' className='w-3.75 h-3.75' alt='Close dialog' />
 				</button>
 				{children}
 			</div>

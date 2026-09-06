@@ -28,9 +28,10 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 				aria-expanded={menuIsOpened}
 				aria-haspopup='menu'
 				aria-controls='profile-menu'
+				aria-label={`${menuIsOpened ? 'Close' : 'Open'} profile menu for ${user.name}`}
 				onClick={() => setMenuIsOpened(!menuIsOpened)}>
 				<Photo src={user.photo} size='small' alt={`${user.name}'s photo`} />
-				<Icon icon='dropdown-arrow' />
+				<Icon icon='dropdown-arrow' alt='Open profile menu' />
 			</button>
 			<div
 				id='profile-menu'
@@ -49,7 +50,7 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 					role='menuitem'
 					className='flex flex-row gap-2.5 cursor-pointer hover:opacity-70'
 					onClick={handleOpenSettings}>
-					<Icon icon='settings' />
+					<Icon icon='settings' alt='Open settings' />
 					<p className='text-preset-7 text-neutral-900'>Settings</p>
 				</button>
 				<button
@@ -57,7 +58,7 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 					role='menuitem'
 					className='flex flex-row gap-2.5 cursor-pointer hover:opacity-70'
 					onClick={logout}>
-					<Icon icon='logout' />
+					<Icon icon='logout' alt='Logout' />
 					<p className='text-preset-7 text-neutral-900'>Logout</p>
 				</button>
 			</div>

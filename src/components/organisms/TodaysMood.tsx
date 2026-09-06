@@ -32,7 +32,7 @@ export default function TodaysMood() {
 					className='md:absolute w-50 h-50 md:w-80 md:h-80 top-12.5 right-10'
 				/>
 				<div className='flex flex-col gap-3 items-center md:items-start'>
-					<Icon icon='quote' className='w-6 h-6' />
+					<Icon icon='quote' className='w-6 h-6' alt='Quote icon' />
 					<p className='text-preset-6-italic text-neutral-900 w-60 text-center md:text-start'>
 						“{moodQuote}”
 					</p>
@@ -40,14 +40,14 @@ export default function TodaysMood() {
 			</Card>
 			<Card className='gap-4'>
 				<div className='flex flex-row gap-3'>
-					<Icon icon='sleep' className='w-5.5 h-5.5' />
+					<Icon icon='sleep' className='w-5.5 h-5.5' alt='Sleep icon' />
 					<p className='text-preset-6 text-neutral-600'>Sleep</p>
 				</div>
 				<p className='text-preset-3 text-neutral-900'>{todaysMood.sleepHours} hours</p>
 			</Card>
 			<Card className='gap-4'>
 				<div className='flex flex-row gap-3'>
-					<Icon icon='reflection' className='w-5.5 h-5.5' />
+					<Icon icon='reflection' className='w-5.5 h-5.5' alt='Reflection icon' />
 					<p className='text-preset-6 text-neutral-600'>Reflection of the day</p>
 				</div>
 				<p className='text-preset-6 text-neutral-900 h-full'>{todaysMood.journalEntry}</p>
