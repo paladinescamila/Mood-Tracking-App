@@ -66,7 +66,7 @@ export default function AddEntryWindow({onClose}: AddEntryWindowProps) {
 					createdAt: new Date().toISOString(),
 					mood: form.mood!,
 					feelings: form.feelings,
-					journalEntry: form.journalEntry,
+					journalEntry: form.journalEntry.trim(),
 					sleepHours: form.sleepHours!,
 				};
 

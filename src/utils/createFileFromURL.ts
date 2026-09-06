@@ -6,6 +6,11 @@
  */
 export const createFileFromURL = async (url: string, fileName: string): Promise<File> => {
 	const response = await fetch(url);
+
+	if (!response.ok) {
+		throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`);
+	}
+
 	const blob = await response.blob();
 	return new File([blob], fileName, {type: blob.type});
 };

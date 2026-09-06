@@ -34,19 +34,26 @@ export default function Signup() {
 				'code' in error &&
 				error.code === 'auth/email-already-in-use'
 			) {
-				const firestoreUser = await getUserByEmail(email);
-
-				if (firestoreUser) {
+				try {
+					const firestoreUser = await getUserByEmail(email);
 					const authUser = await signIn(email, password);
 
 					setAuthUser(authUser);
-					setUser(firestoreUser);
-					navigate('/dashboard');
-				} else {
-					const authUser = await signIn(email, password);
 
-					setAuthUser(authUser);
-					navigate('/onboarding');
+					if (firestoreUser) {
+						setUser(firestoreUser);
+						navigate('/dashboard');
+					} else {
+						navigate('/onboarding');
+					}
+					return;
+				} catch (recoveryError) {
+					console.error('Error recovering existing account:', recoveryError);
+					setErrors((prev) => ({
+						...prev,
+						button: 'Failed to sign in. Please check your credentials.',
+					}));
+					return;
 				}
 			}
 

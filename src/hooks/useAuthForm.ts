@@ -10,7 +10,7 @@ type AuthFormErrors = {
 export const useAuthForm = () => {
 	const [form, setForm] = useState<{email: string; password: string}>({email: '', password: ''});
 	const [errors, setErrors] = useState<AuthFormErrors>({});
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState<boolean>(false);
 
 	const onChangeEmail = (email: string) => {
 		setForm((previous) => ({...previous, email}));

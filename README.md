@@ -1,6 +1,6 @@
 <h1 align="center"> Frontend Mentor - Mood Tracking App</h1>
 
-![](/public/preview.jpg)
+![Mood Tracking App preview](./public/preview.jpg)
 
 This is a solution to the [Mood Tracking App challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/mood-tracking-app-E2XeKhDF0B). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
 
@@ -18,14 +18,14 @@ This is a solution to the [Mood Tracking App challenge on Frontend Mentor](https
 
 ## What I learned
 
-- Building reusable React components with TypeScript and TailwindCSS.
-- Managing authentication, user data, and image uploads with Firebase.
-- Creating accessible forms and responsive dashboard interactions.
+- I learned how to split a multi-step mood form into reusable React components while keeping its state predictable.
+- I practiced handling Firebase authentication, Firestore data, and Storage uploads, including failure states.
+- I improved accessibility with semantic forms, keyboard support, focus management, and screen-reader labels.
 
 ## Continue development
 
-- Add more detailed mood history filters and data visualizations.
-- Improve automated testing for authentication and mood tracking flows.
+- Add automated tests for authentication, onboarding, and mood-entry recovery flows.
+- Add date filters and richer visualizations for longer-term mood and sleep trends.
 
 ## Author
 

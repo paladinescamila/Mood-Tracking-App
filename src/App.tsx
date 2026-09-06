@@ -12,11 +12,16 @@ import RouteAnnouncer from '@/components/atoms/RouteAnnouncer';
 function App() {
 	const {authUser, user} = useAppStore();
 
-	useLoadData();
+	const {error} = useLoadData();
 
 	return (
 		<>
 			<Router>
+				{error ? (
+					<div role='alert' className='sr-only'>
+						{error}
+					</div>
+				) : null}
 				<RouteAnnouncer />
 				<Routes>
 					<Route path='/' element={user ? <Dashboard /> : authUser ? <Onboarding /> : <Login />} />
