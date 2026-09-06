@@ -1,51 +1,24 @@
-import {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, Navigate, useNavigate} from 'react-router-dom';
 import {useAppStore} from '@/stores/app';
-import {checkEmail} from '@/utils/checkEmail';
 import {signUp, signIn} from '@/firebase/auth';
 import {getUserByEmail} from '@/firebase/firestore';
 import NoUser from '@/components/templates/NoUser';
 import Input from '@/components/atoms/Input';
 import Button from '@/components/atoms/Button';
 import ErrorMessage from '@/components/atoms/ErrorMessage';
+import {useAuthForm} from '@/hooks/useAuthForm';
 
 export default function Signup() {
 	const {user, setUser, setAuthUser} = useAppStore();
 	const navigate = useNavigate();
 
-	const [form, setForm] = useState<{email: string; password: string}>({email: '', password: ''});
-	const [errors, setErrors] = useState<{email?: string; password?: string; button?: string}>({});
-	const [loading, setLoading] = useState<boolean>(false);
-
-	const onChangeEmail = (email: string) => {
-		setForm((prev) => ({...prev, email}));
-		setErrors((prev) => ({...prev, email: undefined}));
-	};
-
-	const onChangePassword = (password: string) => {
-		setForm((prev) => ({...prev, password}));
-		setErrors((prev) => ({...prev, password: undefined}));
-	};
+	const {form, errors, loading, setErrors, setLoading, onChangeEmail, onChangePassword, validate} =
+		useAuthForm();
 
 	const handleSignup = async () => {
-		setErrors({});
+		if (!validate(true)) return;
 
 		const {email, password} = form;
-
-		if (!email) {
-			setErrors((prev) => ({...prev, email: 'Email is required.'}));
-			return;
-		}
-
-		if (!checkEmail(email)) {
-			setErrors((prev) => ({...prev, email: 'Invalid email format.'}));
-			return;
-		}
-
-		if (!password) {
-			setErrors((prev) => ({...prev, password: 'Password is required.'}));
-			return;
-		}
 
 		try {
 			setLoading(true);
@@ -85,8 +58,7 @@ export default function Signup() {
 	};
 
 	if (user) {
-		navigate('/dashboard');
-		return;
+		return <Navigate replace to='/dashboard' />;
 	}
 
 	return (

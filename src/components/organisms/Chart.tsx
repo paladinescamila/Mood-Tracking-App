@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import {MOODS_DATA} from '@/constants/moods';
 import {getDateSplitted} from '@/utils/getDateSplitted';
 import {MONTHS_SHORT} from '@/constants/time';
@@ -8,6 +8,7 @@ import Icon from '@/components/atoms/Icon';
 import MoodIcon from '@/components/atoms/MoodIcon';
 import {useAppStore} from '@/stores/app';
 import {FEELINGS_DATA} from '@/constants/feelings';
+import {CHART_MAX_RENDERED_ITEMS} from '@/constants/dashboard';
 
 type TooltipPlacement = 'left' | 'right' | 'center';
 
@@ -16,6 +17,7 @@ export default function Chart() {
 
 	const chartRef = useRef<HTMLDivElement>(null);
 	const [tooltipPlacements, setTooltipPlacements] = useState<Record<number, TooltipPlacement>>({});
+	const [selectedTooltipIndex, setSelectedTooltipIndex] = useState<number | null>(null);
 
 	const updateTooltipPlacement = (index: number, element: HTMLDivElement) => {
 		const chart = chartRef.current;
@@ -36,6 +38,11 @@ export default function Chart() {
 		setTooltipPlacements((current) => ({...current, [index]: placement}));
 	};
 
+	const toggleTooltip = (index: number, element: HTMLDivElement) => {
+		updateTooltipPlacement(index, element);
+		setSelectedTooltipIndex((current) => (current === index ? null : index));
+	};
+
 	useEffect(() => {
 		const element = chartRef.current;
 
@@ -43,6 +50,8 @@ export default function Chart() {
 
 		element.scrollLeft = element.scrollWidth;
 	}, [moods.length]);
+
+	const renderedMoods = useMemo(() => moods.slice(-CHART_MAX_RENDERED_ITEMS), [moods]);
 
 	return (
 		<Card className='gap-8 flex-1 min-w-0 overflow-hidden'>
@@ -69,11 +78,22 @@ export default function Chart() {
 					ref={chartRef}
 					className='flex-1 min-w-0 h-78 ml-13 pt-1 pb-4 overflow-x-auto overflow-y-hidden scrollbar-thin scrollbar-thumb-blue-200 scrollbar-track-neutral-0'>
 					<div className='flex flex-row gap-5 h-full w-max'>
-						{moods.map((entry, index) => (
+						{renderedMoods.map((entry, index) => (
 							<div
 								key={index}
 								onMouseEnter={(event) => updateTooltipPlacement(index, event.currentTarget)}
-								className='flex flex-col justify-end gap-2.5 z-10 hover:z-20 shrink-0 relative group'>
+								onClick={(event) => toggleTooltip(index, event.currentTarget)}
+								onKeyDown={(event) => {
+									if (event.key === 'Enter' || event.key === ' ') {
+										event.preventDefault();
+										toggleTooltip(index, event.currentTarget);
+									}
+								}}
+								role='button'
+								tabIndex={0}
+								aria-expanded={selectedTooltipIndex === index}
+								aria-label={`Show details for ${getDateSplitted(entry.createdAt).month + 1}/${getDateSplitted(entry.createdAt).day}`}
+								className={`flex flex-col justify-end gap-2.5 shrink-0 relative group ${selectedTooltipIndex === index ? 'z-20' : 'z-10 hover:z-20'}`}>
 								<div
 									className={`rounded-4xl w-10 flex justify-center p-1.25
 										${MOODS_DATA[entry.mood].bgClass}
@@ -102,7 +122,7 @@ export default function Chart() {
 									</p>
 								</div>
 								<div
-									className={`absolute w-43 h-auto flex-col gap-3 p-3 rounded-[10px] bg-neutral-0 top-2 hidden group-hover:flex chart-tooltip-shadow ${
+									className={`${selectedTooltipIndex === index ? 'flex' : 'hidden group-hover:flex'} absolute w-43 h-auto flex-col gap-3 p-3 rounded-[10px] bg-neutral-0 top-2 chart-tooltip-shadow ${
 										tooltipPlacements[index] === 'right'
 											? 'left-[calc(100%+8px)]'
 											: tooltipPlacements[index] === 'center'

@@ -21,8 +21,8 @@ export default function Select<T extends string>({
 	const labelId = useId();
 
 	return (
-		<fieldset className='flex flex-col gap-6 md:gap-8' aria-labelledby={labelId}>
-			<legend id={labelId} className='flex flex-col gap-1.5'>
+		<fieldset className='flex flex-col' aria-labelledby={labelId}>
+			<legend id={labelId} className='flex flex-col gap-1.5 mb-6 md:mb-8'>
 				<Title as='span'>{label}</Title>
 				{description && <SubTitle>{description}</SubTitle>}
 			</legend>
@@ -30,12 +30,13 @@ export default function Select<T extends string>({
 				{options.map((option) => (
 					<li key={option.value} className='w-full'>
 						<Tag
-							role='radio'
-							aria-checked={value === option.value}
 							name={option.label}
 							icon={option.icon}
 							checked={value === option.value}
 							onClick={() => onChange(option.value)}
+							controlType='radio'
+							inputName={labelId}
+							value={option.value}
 							className='w-full!'
 						/>
 					</li>

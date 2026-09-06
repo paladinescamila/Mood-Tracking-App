@@ -64,7 +64,7 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 		try {
 			setLoading(true);
 
-			let photoURL;
+			let photoURL = user?.photo || '';
 
 			if (user) {
 				if (photo) {
@@ -73,14 +73,15 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 						return;
 					}
 
-					if (user.photo) {
-						await deleteFile(user.photo);
-					}
-
 					photoURL = await uploadFile(photo, createUserPhotoURL(user.id, photo.name));
 				}
 
 				await updateUser(user.id, {name: name.trim(), photo: photoURL});
+
+				if (photoURL && user.photo && user.photo !== photoURL) {
+					await deleteFile(user.photo);
+				}
+
 				setUser({...user, name: name.trim(), photo: photoURL});
 			}
 
@@ -94,7 +95,11 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 	};
 
 	return (
-		<Window className='flex flex-col gap-8' backgroundClassName='bg-neutral-0' onClose={onClose}>
+		<Window
+			className='flex flex-col gap-8'
+			backgroundClassName='bg-neutral-0'
+			onClose={onClose}
+			labelledBy='settings-title'>
 			<form
 				className='flex flex-col gap-8'
 				onSubmit={(event) => {
@@ -102,7 +107,7 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 					void handleSave();
 				}}>
 				<div className='flex flex-col gap-2'>
-					<Title>Update your profile</Title>
+					<Title id='settings-title'>Update your profile</Title>
 					<SubTitle>Personalize your account with your name and photo.</SubTitle>
 				</div>
 				<div className='flex flex-col gap-6'>

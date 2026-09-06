@@ -60,27 +60,35 @@ export default function AddEntryWindow({onClose}: AddEntryWindowProps) {
 		} else {
 			setSaving(true);
 
-			const newMoodEntry: MoodEntry = {
-				id: generateID(),
-				createdAt: new Date().toISOString(),
-				mood: form.mood!,
-				feelings: form.feelings,
-				journalEntry: form.journalEntry,
-				sleepHours: form.sleepHours!,
-			};
+			try {
+				const newMoodEntry: MoodEntry = {
+					id: generateID(),
+					createdAt: new Date().toISOString(),
+					mood: form.mood!,
+					feelings: form.feelings,
+					journalEntry: form.journalEntry,
+					sleepHours: form.sleepHours!,
+				};
 
-			addMoodEntry(newMoodEntry);
+				addMoodEntry(newMoodEntry);
 
-			await addUserMood(user!.id, newMoodEntry);
+				await addUserMood(user!.id, newMoodEntry);
 
-			setSaving(false);
-			onClose?.();
+				onClose?.();
+			} catch (error) {
+				console.error('Error saving mood entry:', error);
+				setError('Failed to save mood entry. Please try again.');
+			} finally {
+				setSaving(false);
+			}
 		}
 	};
 
 	return (
-		<Window className='flex flex-col gap-8' onClose={onClose}>
-			<h1 className='text-preset-3 md:text-preset-2 text-neutral-900'>Log your mood</h1>
+		<Window className='flex flex-col gap-8' onClose={onClose} labelledBy='add-entry-title'>
+			<h1 id='add-entry-title' className='text-preset-3 md:text-preset-2 text-neutral-900'>
+				Log your mood
+			</h1>
 			<StepsProgress progress={step} total={4} />
 			{step === 1 && (
 				<Select

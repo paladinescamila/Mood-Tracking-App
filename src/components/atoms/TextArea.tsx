@@ -27,7 +27,7 @@ export default function TextArea({
 
 	return (
 		<div className='flex flex-col gap-2'>
-			<label className='flex flex-col gap-1.5 mb-4 md:mb-6'>
+			<label htmlFor={textareaId} className='flex flex-col gap-1.5 mb-4 md:mb-6'>
 				<Title as='span'>{label}</Title>
 				{description && <p className='text-preset-6 text-neutral-600'>{description}</p>}
 			</label>

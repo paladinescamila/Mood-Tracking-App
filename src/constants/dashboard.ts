@@ -1,3 +1,3 @@
 export const AVERAGES_LAST_CHECKINS = 5;
 
-export const CHART_MAX_POINTS = 7;
+export const CHART_MAX_RENDERED_ITEMS = 15;

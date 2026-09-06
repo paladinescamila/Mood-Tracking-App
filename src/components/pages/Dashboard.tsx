@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useAppStore} from '@/stores/app';
-import {useNavigate} from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
 import Logo from '@/components/atoms/Logo';
 import ProfileMenu from '@/components/organisms/ProfileMenu';
 import Screen from '@/components/atoms/Screen';
@@ -10,7 +10,6 @@ import Averages from '@/components/organisms/Averages';
 import Chart from '@/components/organisms/Chart';
 import AddEntryWindow from '@/components/organisms/AddEntryWindow';
 import TodaysMood from '@/components/organisms/TodaysMood';
-import {useLoadData} from '@/hooks/useLoadData';
 import {useTodaysMood} from '@/hooks/useTodaysMood';
 
 export default function Dashboard() {
@@ -18,13 +17,8 @@ export default function Dashboard() {
 	const {todaysMood} = useTodaysMood();
 	const [showAddEntryWindow, setShowAddEntryWindow] = useState<boolean>(false);
 
-	useLoadData();
-
-	const navigate = useNavigate();
-
 	if (!user) {
-		navigate('/login');
-		return;
+		return <Navigate replace to='/login' />;
 	}
 
 	return (

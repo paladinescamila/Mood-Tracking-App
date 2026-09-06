@@ -28,8 +28,8 @@ export default function MultiSelect<T extends string>({
 	};
 
 	return (
-		<fieldset className='flex flex-col gap-6 md:gap-8' aria-labelledby={labelId}>
-			<legend id={labelId} className='flex flex-col gap-1.5'>
+		<fieldset className='flex flex-col' aria-labelledby={labelId}>
+			<legend id={labelId} className='flex flex-col gap-1.5 mb-6 md:mb-8'>
 				<Title as='span'>{label}</Title>
 				{description && <p className='text-preset-6 text-neutral-600'>{description}</p>}
 			</legend>
@@ -37,13 +37,13 @@ export default function MultiSelect<T extends string>({
 				{options.map((option) => (
 					<li key={option.value}>
 						<Tag
-							role='checkbox'
-							aria-checked={value.includes(option.value)}
 							name={option.label}
 							icon={option.icon}
 							checked={value.includes(option.value)}
 							onClick={() => onCheckOption(option.value)}
-							checkStyle='square'
+							controlType='checkbox'
+							inputName={labelId}
+							value={option.value}
 							size='small'
 						/>
 					</li>

@@ -6,7 +6,13 @@ interface StepsProgressProps {
 
 export default function StepsProgress({progress, total, className = ''}: StepsProgressProps) {
 	return (
-		<div className={`flex flex-row items-center gap-4 ${className}`}>
+		<div
+			className={`flex flex-row items-center gap-4 ${className}`}
+			role='progressbar'
+			aria-label={`Step ${progress} of ${total}`}
+			aria-valuemin={1}
+			aria-valuemax={total}
+			aria-valuenow={progress}>
 			{Array.from({length: total}, (_, index) => (
 				<div
 					key={index}

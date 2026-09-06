@@ -1,4 +1,4 @@
-import {useRef} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import Photo from '@/components/atoms/Photo';
 import Button from '@/components/atoms/Button';
 import ErrorMessage from '@/components/atoms/ErrorMessage';
@@ -12,7 +12,20 @@ interface UploadImageProps {
 export default function UploadImage({value = null, onChange, error}: UploadImageProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const src = value ? URL.createObjectURL(value) : undefined;
+	const [src, setSrc] = useState<string>();
+
+	useEffect(() => {
+		if (!value) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
+			setSrc(undefined);
+			return;
+		}
+
+		const objectUrl = URL.createObjectURL(value);
+		setSrc(objectUrl);
+
+		return () => URL.revokeObjectURL(objectUrl);
+	}, [value]);
 
 	return (
 		<div className='flex flex-row items-start gap-5'>

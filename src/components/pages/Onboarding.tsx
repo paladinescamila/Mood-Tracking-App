@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import {Navigate, useNavigate} from 'react-router-dom';
 import {useAppStore} from '@/stores/app';
 import {createUser} from '@/firebase/firestore';
 import {uploadFile} from '@/firebase/storage';
@@ -70,13 +70,11 @@ export default function Onboarding() {
 	};
 
 	if (!authUser) {
-		navigate('/login');
-		return;
+		return <Navigate replace to='/login' />;
 	}
 
 	if (user) {
-		navigate('/dashboard');
-		return;
+		return <Navigate replace to='/dashboard' />;
 	}
 
 	return (
