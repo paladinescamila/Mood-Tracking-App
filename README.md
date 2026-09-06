@@ -18,7 +18,14 @@ This is a solution to the [Mood Tracking App challenge on Frontend Mentor](https
 
 ## What I learned
 
+- Building reusable React components with TypeScript and TailwindCSS.
+- Managing authentication, user data, and image uploads with Firebase.
+- Creating accessible forms and responsive dashboard interactions.
+
 ## Continue development
+
+- Add more detailed mood history filters and data visualizations.
+- Improve automated testing for authentication and mood tracking flows.
 
 ## Author
 
