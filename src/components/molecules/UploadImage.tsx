@@ -24,7 +24,7 @@ export default function UploadImage({value = null, onChange, error}: UploadImage
 				className='hidden'
 				ref={inputRef}
 			/>
-			<Photo src={src} />
+			<Photo src={src} alt='Uploaded image' />
 			<div className='flex flex-col gap-4'>
 				<div className='flex flex-col gap-1.5'>
 					<p className='text-preset-6-regular text-neutral-900'>Upload Image</p>

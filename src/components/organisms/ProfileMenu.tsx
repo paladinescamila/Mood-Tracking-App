@@ -25,7 +25,7 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 			<button
 				className='flex flex-row gap-2.5 items-center cursor-pointer custom-outline'
 				onClick={() => setMenuIsOpened(!menuIsOpened)}>
-				<Photo src={user.photo} size='small' />
+				<Photo src={user.photo} size='small' alt={`${user.name}'s photo`} />
 				<Icon icon='dropdown-arrow' />
 			</button>
 			<div
