@@ -16,5 +16,6 @@ describe('getTrend', () => {
 
 	it('returns null when there are fewer than two values', () => {
 		expect(getTrend([1])).toBeNull();
+		expect(getTrend([])).toBeNull();
 	});
 });
