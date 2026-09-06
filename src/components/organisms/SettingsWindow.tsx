@@ -95,23 +95,30 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 
 	return (
 		<Window className='flex flex-col gap-8' backgroundClassName='bg-neutral-0' onClose={onClose}>
-			<div className='flex flex-col gap-2'>
-				<Title>Update your profile</Title>
-				<SubTitle>Personalize your account with your name and photo.</SubTitle>
-			</div>
-			<div className='flex flex-col gap-6'>
-				<Input
-					label='Name'
-					placeholder='Jane Appleseed'
-					value={form.name}
-					onChange={onChangeName}
-					error={errors.name}
-				/>
-				<UploadImage value={form.photo} onChange={onChangePhoto} error={errors.photo} />
-			</div>
-			<Button onClick={handleSave} loading={loading} disabled={loading}>
-				Save changes
-			</Button>
+			<form
+				className='flex flex-col gap-8'
+				onSubmit={(event) => {
+					event.preventDefault();
+					void handleSave();
+				}}>
+				<div className='flex flex-col gap-2'>
+					<Title>Update your profile</Title>
+					<SubTitle>Personalize your account with your name and photo.</SubTitle>
+				</div>
+				<div className='flex flex-col gap-6'>
+					<Input
+						label='Name'
+						placeholder='Jane Appleseed'
+						value={form.name}
+						onChange={onChangeName}
+						error={errors.name}
+					/>
+					<UploadImage value={form.photo} onChange={onChangePhoto} error={errors.photo} />
+				</div>
+				<Button loading={loading} disabled={loading}>
+					Save changes
+				</Button>
+			</form>
 		</Window>
 	);
 }

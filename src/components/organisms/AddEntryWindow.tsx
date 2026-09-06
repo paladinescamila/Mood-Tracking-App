@@ -102,6 +102,7 @@ export default function AddEntryWindow({onClose}: AddEntryWindowProps) {
 			{step === 3 && (
 				<TextArea
 					label='Write about your day...'
+					placeholder='Today, I felt...'
 					value={form.journalEntry}
 					onChange={(journalEntry) => onChange({journalEntry})}
 					limit={150}

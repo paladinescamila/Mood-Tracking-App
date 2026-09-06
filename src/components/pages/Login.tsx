@@ -78,7 +78,13 @@ export default function Login() {
 
 	return (
 		<NoUser title='Welcome back!' subtitle=' Log in to continue tracking your mood and sleep.'>
-			<form className='flex flex-col gap-5'>
+			<form
+				id='login-form'
+				className='flex flex-col gap-5'
+				onSubmit={(event) => {
+					event.preventDefault();
+					void handleLogin();
+				}}>
 				<Input
 					label='Email address'
 					placeholder='name@mail.com'
@@ -100,7 +106,7 @@ export default function Login() {
 			<footer className='flex flex-col gap-5'>
 				<div className='flex flex-col gap-3'>
 					{errors.button ? <ErrorMessage error={errors.button} /> : null}
-					<Button className='w-full' onClick={handleLogin} loading={loading} disabled={loading}>
+					<Button form='login-form' className='w-full' loading={loading} disabled={loading}>
 						Log In
 					</Button>
 				</div>

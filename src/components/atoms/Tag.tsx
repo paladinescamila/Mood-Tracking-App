@@ -8,6 +8,8 @@ interface TagProps {
 	size?: 'small' | 'normal';
 	icon?: React.ReactNode;
 	className?: string;
+	role?: React.AriaRole;
+	'aria-checked'?: boolean;
 }
 
 export default function Tag({
@@ -18,9 +20,15 @@ export default function Tag({
 	size = 'normal',
 	icon,
 	className = '',
+	role,
+	'aria-checked': ariaChecked,
 }: TagProps) {
 	return (
-		<div
+		<button
+			type='button'
+			role={role}
+			aria-checked={ariaChecked}
+			aria-pressed={checked}
 			className={`flex flex-row items-center py-3 rounded-[10px] cursor-pointer bg-neutral-0 w-max border-2 ${size === 'small' ? 'gap-2 px-4 text-preset-6-regular' : 'gap-3 px-5 text-preset-5'} ${checked ? 'border-blue-600' : 'border-blue-100'} ${className}`}
 			onClick={onClick}>
 			{checkStyle === 'square' ? (
@@ -34,6 +42,6 @@ export default function Tag({
 			)}
 			<span className='select-none'>{name}</span>
 			{icon && <div className='ml-auto select-none'>{icon}</div>}
-		</div>
+		</button>
 	);
 }

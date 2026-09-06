@@ -83,7 +83,13 @@ export default function Onboarding() {
 		<NoUser
 			title='Personalize your experience'
 			subtitle='Add your name and a profile picture to make Mood yours.'>
-			<form className='flex flex-col gap-8'>
+			<form
+				id='onboarding-form'
+				className='flex flex-col gap-8'
+				onSubmit={(event) => {
+					event.preventDefault();
+					void handleStart();
+				}}>
 				<div className='flex flex-col gap-6'>
 					<Input
 						label='Name'
@@ -97,7 +103,7 @@ export default function Onboarding() {
 
 				<div className='flex flex-col gap-3'>
 					{errors.button ? <ErrorMessage error={errors.button} /> : null}
-					<Button className='w-full' onClick={handleStart} loading={loading} disabled={loading}>
+					<Button form='onboarding-form' className='w-full' loading={loading} disabled={loading}>
 						Start Tracking
 					</Button>
 				</div>

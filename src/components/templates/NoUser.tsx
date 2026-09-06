@@ -17,7 +17,7 @@ export default function NoUser({title, subtitle, children}: NoUserProps) {
 			</header>
 			<div className='flex flex-col gap-8 w-full md:w-132.5 px-4 md:px-8 py-10 rounded-2xl bg-neutral-0 card-shadow'>
 				<div className='flex flex-col gap-2'>
-					<Title>{title}</Title>
+					<Title as='h1'>{title}</Title>
 					<SubTitle>{subtitle}</SubTitle>
 				</div>
 				{children}

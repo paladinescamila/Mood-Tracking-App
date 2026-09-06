@@ -17,6 +17,7 @@ export default function UploadImage({value = null, onChange, error}: UploadImage
 	return (
 		<div className='flex flex-row items-start gap-5'>
 			<input
+				aria-label='Profile image'
 				type='file'
 				accept='image/png, image/jpeg'
 				onChange={(e) => e.target.files && e.target.files.length > 0 && onChange(e.target.files[0])}
@@ -30,7 +31,7 @@ export default function UploadImage({value = null, onChange, error}: UploadImage
 					<p className='text-preset-6-regular text-neutral-900'>Upload Image</p>
 					<p className='text-preset-7 text-neutral-600'>Max 250KB, PNG or JPEG</p>
 				</div>
-				<Button type='secondary' onClick={() => inputRef.current?.click()}>
+				<Button type='secondary' htmlType='button' onClick={() => inputRef.current?.click()}>
 					Upload
 				</Button>
 				{error ? <ErrorMessage error={error} /> : null}

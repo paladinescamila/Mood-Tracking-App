@@ -23,12 +23,19 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 	return (
 		<div className='relative'>
 			<button
+				type='button'
 				className='flex flex-row gap-2.5 items-center cursor-pointer custom-outline'
+				aria-expanded={menuIsOpened}
+				aria-haspopup='menu'
+				aria-controls='profile-menu'
 				onClick={() => setMenuIsOpened(!menuIsOpened)}>
 				<Photo src={user.photo} size='small' alt={`${user.name}'s photo`} />
 				<Icon icon='dropdown-arrow' />
 			</button>
 			<div
+				id='profile-menu'
+				role='menu'
+				aria-hidden={!menuIsOpened}
 				ref={ref}
 				className='absolute top-[calc(100%+8px)] right-0 px-4 py-3 bg-neutral-0 rounded flex flex-col gap-3 min-w-50 max-w-60 menu-shadow'
 				style={{display: menuIsOpened ? 'flex' : 'none'}}>
@@ -38,12 +45,18 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 				</div>
 				<div className='w-full h-px bg-blue-100' />
 				<button
+					type='button'
+					role='menuitem'
 					className='flex flex-row gap-2.5 cursor-pointer hover:opacity-70'
 					onClick={handleOpenSettings}>
 					<Icon icon='settings' />
 					<p className='text-preset-7 text-neutral-900'>Settings</p>
 				</button>
-				<button className='flex flex-row gap-2.5 cursor-pointer hover:opacity-70' onClick={logout}>
+				<button
+					type='button'
+					role='menuitem'
+					className='flex flex-row gap-2.5 cursor-pointer hover:opacity-70'
+					onClick={logout}>
 					<Icon icon='logout' />
 					<p className='text-preset-7 text-neutral-900'>Logout</p>
 				</button>

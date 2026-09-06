@@ -91,7 +91,13 @@ export default function Signup() {
 
 	return (
 		<NoUser title='Create an account' subtitle='Join to track your daily mood and sleep with ease.'>
-			<form className='flex flex-col gap-5'>
+			<form
+				id='signup-form'
+				className='flex flex-col gap-5'
+				onSubmit={(event) => {
+					event.preventDefault();
+					void handleSignup();
+				}}>
 				<Input
 					label='Email address'
 					placeholder='name@mail.com'
@@ -111,7 +117,7 @@ export default function Signup() {
 			<footer className='flex flex-col gap-5'>
 				<div className='flex flex-col gap-3'>
 					{errors.button ? <ErrorMessage error={errors.button} /> : null}
-					<Button className='w-full' onClick={handleSignup} loading={loading} disabled={loading}>
+					<Button form='signup-form' className='w-full' loading={loading} disabled={loading}>
 						Sign Up
 					</Button>
 				</div>
