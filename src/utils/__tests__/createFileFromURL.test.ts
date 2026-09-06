@@ -8,7 +8,13 @@ describe('createFileFromURL', () => {
 
 	it('converts a successful response into a File', async () => {
 		const blob = new Blob(['avatar'], {type: 'image/png'});
-		vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(blob, {status: 200})));
+		vi.stubGlobal(
+			'fetch',
+			vi.fn().mockResolvedValue({
+				ok: true,
+				blob: vi.fn().mockResolvedValue(blob),
+			}),
+		);
 
 		const file = await createFileFromURL('https://example.com/avatar.png', 'avatar.png');
 

@@ -21,4 +21,12 @@ describe('getAverageOfDefinedValues', () => {
 	it('returns null when no values are mapped', () => {
 		expect(getAverageOfDefinedValues(['unknown' as Level], levels)).toBeNull();
 	});
+
+	it('returns null for an empty input', () => {
+		expect(getAverageOfDefinedValues([], levels)).toBeNull();
+	});
+
+	it('keeps the first mapped value when the average is tied', () => {
+		expect(getAverageOfDefinedValues(['low', 'high'], levels)).toBe('low');
+	});
 });
