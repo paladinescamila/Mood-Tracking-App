@@ -1,7 +1,7 @@
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {MOODS_DATA} from '@/constants/moods';
 import {getDateSplitted} from '@/utils/getDateSplitted';
-import {MONTHS} from '@/constants/time';
+import {MONTHS_SHORT} from '@/constants/time';
 import {SLEEP_HOURS_TO_SHOW} from '@/constants/sleepHours';
 import Card from '@/components/atoms/Card';
 import Icon from '@/components/atoms/Icon';
@@ -9,10 +9,32 @@ import MoodIcon from '@/components/atoms/MoodIcon';
 import {useAppStore} from '@/stores/app';
 import {FEELINGS_DATA} from '@/constants/feelings';
 
+type TooltipPlacement = 'left' | 'right' | 'center';
+
 export default function Chart() {
 	const {moodsHistory: moods} = useAppStore();
 
 	const chartRef = useRef<HTMLDivElement>(null);
+	const [tooltipPlacements, setTooltipPlacements] = useState<Record<number, TooltipPlacement>>({});
+
+	const updateTooltipPlacement = (index: number, element: HTMLDivElement) => {
+		const chart = chartRef.current;
+
+		if (!chart) return;
+
+		const chartBounds = chart.getBoundingClientRect();
+		const itemBounds = element.getBoundingClientRect();
+
+		const spaceOnLeft = itemBounds.left - chartBounds.left;
+		const spaceOnRight = chartBounds.right - itemBounds.right;
+
+		const requiredSpace = 172 + 8 + 1; // tooltip width + gap + 1px for shadow
+
+		const placement =
+			spaceOnLeft >= requiredSpace ? 'left' : spaceOnRight >= requiredSpace ? 'right' : 'center';
+
+		setTooltipPlacements((current) => ({...current, [index]: placement}));
+	};
 
 	useEffect(() => {
 		const element = chartRef.current;
@@ -50,7 +72,8 @@ export default function Chart() {
 						{moods.map((entry, index) => (
 							<div
 								key={index}
-								className='flex flex-col justify-end gap-2.5 z-10 shrink-0 relative group'>
+								onMouseEnter={(event) => updateTooltipPlacement(index, event.currentTarget)}
+								className='flex flex-col justify-end gap-2.5 z-10 hover:z-20 shrink-0 relative group'>
 								<div
 									className={`rounded-4xl w-10 flex justify-center p-1.25
 										${MOODS_DATA[entry.mood].bgClass}
@@ -71,14 +94,21 @@ export default function Chart() {
 
 								<div className='flex flex-col gap-1.5 items-center'>
 									<p className='text-preset-9 text-neutral-900'>
-										{MONTHS[getDateSplitted(entry.createdAt).month]}
+										{MONTHS_SHORT[getDateSplitted(entry.createdAt).month]}
 									</p>
 
 									<p className='text-preset-8 text-neutral-900'>
 										{getDateSplitted(entry.createdAt).day}
 									</p>
 								</div>
-								<div className='absolute w-43 h-auto flex-col gap-3 p-3 rounded-[10px] bg-neutral-0 right-[calc(100%+8px)] top-2 hidden group-hover:flex chart-tooltip-shadow'>
+								<div
+									className={`absolute w-43 h-auto flex-col gap-3 p-3 rounded-[10px] bg-neutral-0 top-2 hidden group-hover:flex chart-tooltip-shadow ${
+										tooltipPlacements[index] === 'right'
+											? 'left-[calc(100%+8px)]'
+											: tooltipPlacements[index] === 'center'
+												? 'left-1/2 -translate-x-1/2'
+												: 'right-[calc(100%+8px)]'
+									}`}>
 									<div className='flex flex-col gap-1.5'>
 										<p className='text-preset-8 text-neutral-600'>Mood</p>
 										<div className='flex flex-row gap-1.5'>

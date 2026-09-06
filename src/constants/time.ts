@@ -14,3 +14,5 @@ export const MONTHS = [
 	'November',
 	'December',
 ];
+
+export const MONTHS_SHORT = MONTHS.map((month) => month.slice(0, 3));
