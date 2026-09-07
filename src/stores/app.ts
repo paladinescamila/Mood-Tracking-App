@@ -2,7 +2,6 @@ import {create} from 'zustand';
 import {persist, createJSONStorage} from 'zustand/middleware';
 import {sortMoodsHistory} from '@/utils/sortMoodsHistory';
 import type {FirebaseUser} from '@/firebase/config';
-import {SAMPLE_MOODS_HISTORY, SAMPLE_USER} from '@/constants/sample';
 
 interface AppState {
 	authUser: FirebaseUser | null;
@@ -23,11 +22,11 @@ export const useAppStore = create<AppState>()(
 			authUser: null,
 			setAuthUser: (authUser) => set({authUser}),
 
-			user: SAMPLE_USER,
+			user: null,
 			setUser: (user) => set({user}),
 
 			// Moods history
-			moodsHistory: SAMPLE_MOODS_HISTORY,
+			moodsHistory: [],
 			setMoodsHistory: (moodsHistory) => set({moodsHistory: sortMoodsHistory(moodsHistory)}),
 			addMoodEntry: (moodEntry) =>
 				set(({moodsHistory}) => ({moodsHistory: sortMoodsHistory([...moodsHistory, moodEntry])})),

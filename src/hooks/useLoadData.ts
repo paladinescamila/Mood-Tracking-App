@@ -26,6 +26,10 @@ export const useLoadData = () => {
 						const moodsHistory = await getUserMoods(authUser.uid);
 						setMoodsHistory(moodsHistory);
 					}
+				} else {
+					setAuthUser(null);
+					setUser(null);
+					setMoodsHistory([]);
 				}
 			} catch (loadError) {
 				console.error('Error loading user data:', loadError);

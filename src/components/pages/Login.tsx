@@ -50,6 +50,36 @@ export default function Login() {
 		}
 	};
 
+	const tryDemoAccount = async () => {
+		try {
+			const demoEmail = import.meta.env.VITE_DEMO_USER_EMAIL;
+			const demoPassword = import.meta.env.VITE_DEMO_USER_PASSWORD;
+
+			if (!demoEmail || !demoPassword)
+				return setErrors((prev) => ({
+					...prev,
+					button: 'Demo account credentials are not set. Please contact support.',
+				}));
+
+			const authUser = await signIn(demoEmail, demoPassword);
+			const firestoreUser = await getUser(authUser.uid);
+
+			if (firestoreUser) {
+				setUser(firestoreUser);
+				navigate('/dashboard');
+			} else {
+				setAuthUser(authUser);
+				navigate('/onboarding');
+			}
+		} catch (error) {
+			console.error('Error signing in with demo account:', error);
+			setErrors((prev) => ({
+				...prev,
+				button: 'Failed to sign in with demo account. Please try again.',
+			}));
+		}
+	};
+
 	if (user) {
 		return <Navigate replace to='/dashboard' />;
 	}
@@ -81,18 +111,27 @@ export default function Login() {
 				/>
 			</form>
 
-			<footer className='flex flex-col gap-5'>
+			<footer className='flex flex-col gap-2'>
 				<div className='flex flex-col gap-3'>
 					{errors.button ? <ErrorMessage error={errors.button} /> : null}
 					<Button form='login-form' className='w-full' loading={loading} disabled={loading}>
 						Log In
 					</Button>
 				</div>
-				<p className='text-preset-6-regular text-neutral-600 text-center'>
+				<p className='text-preset-6-regular text-neutral-600 text-center mt-3'>
 					Haven't got an account?{' '}
 					<Link to='/signup' className='text-blue-600 custom-outline rounded-md'>
 						Sign up.
 					</Link>
+				</p>
+				<p className='text-preset-7 text-neutral-600 text-center'>
+					Or explore with a{' '}
+					<button
+						onClick={tryDemoAccount}
+						className='text-preset-7 text-blue-600 custom-outline rounded-md cursor-pointer'>
+						demo account
+					</button>
+					.
 				</p>
 			</footer>
 		</NoUser>
