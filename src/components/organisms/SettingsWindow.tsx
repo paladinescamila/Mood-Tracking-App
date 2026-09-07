@@ -1,8 +1,5 @@
-import {useState} from 'react';
 import {useAppStore} from '@/stores/app';
-import {updateUser} from '@/firebase/firestore';
-import {uploadFile, deleteFile} from '@/firebase/storage';
-import {createUserPhotoURL} from '@/utils/createUserPhotoURL';
+import {useProfileForm} from '@/hooks/useProfileForm';
 import Input from '@/components/atoms/Input';
 import SubTitle from '@/components/atoms/SubTitle';
 import Title from '@/components/atoms/Title';
@@ -10,6 +7,10 @@ import Window from '@/components/atoms/Window';
 import UploadImage from '@/components/molecules/UploadImage';
 import Button from '@/components/atoms/Button';
 import ErrorMessage from '@/components/atoms/ErrorMessage';
+import {updateUser} from '@/firebase/firestore';
+import {deleteFile, uploadFile} from '@/firebase/storage';
+import {createUserPhotoURL} from '@/utils/createUserPhotoURL';
+import {checkPhotoExceedsLimit} from '@/utils/checkPhotoExceedsLimit';
 
 interface SettingsWindowProps {
 	onClose?: () => void;
@@ -18,56 +19,34 @@ interface SettingsWindowProps {
 export default function SettingsWindow({onClose}: SettingsWindowProps) {
 	const {user, setUser} = useAppStore();
 
-	const [form, setForm] = useState<{name: string; photo: File | null}>({
-		name: user?.name || '',
-		photo: null,
-	});
-
-	const [errors, setErrors] = useState<{name?: string; photo?: string; button?: string}>({});
-	const [loading, setLoading] = useState<boolean>(false);
-
-	const onChangeName = (name: string) => {
-		setForm((prev) => ({...prev, name}));
-		setErrors((prev) => ({...prev, name: undefined}));
-	};
-
-	const onChangePhoto = (photo: File | null) => {
-		setForm((prev) => ({...prev, photo}));
-		setErrors((prev) => ({...prev, photo: undefined}));
-	};
+	const {form, errors, loading, setErrors, setLoading, onChangeName, onChangePhoto, validate} =
+		useProfileForm(user?.name || '');
 
 	const handleSave = async () => {
-		setErrors({});
-
-		const {name, photo} = form;
-
-		if (!name.trim()) {
-			setErrors((prev) => ({...prev, name: 'Name is required.'}));
-			return;
-		}
+		if (!validate()) return;
 
 		try {
 			setLoading(true);
 
-			let photoURL = user?.photo || '';
-
 			if (user) {
-				if (photo) {
-					if (photo.size / 1024 > 250) {
+				let photoURL = user.photo;
+
+				if (form.photo) {
+					if (checkPhotoExceedsLimit(form.photo)) {
 						setErrors((prev) => ({...prev, photo: 'Image size exceeds 250KB.'}));
 						return;
 					}
 
-					photoURL = await uploadFile(photo, createUserPhotoURL(user.id, photo.name));
+					photoURL = await uploadFile(form.photo, createUserPhotoURL(user.id, form.photo.name));
 				}
 
-				await updateUser(user.id, {name: name.trim(), photo: photoURL});
+				await updateUser(user.id, {name: form.name.trim(), photo: photoURL});
 
 				if (photoURL && user.photo && user.photo !== photoURL) {
 					await deleteFile(user.photo);
 				}
 
-				setUser({...user, name: name.trim(), photo: photoURL});
+				setUser({...user, name: form.name.trim(), photo: photoURL});
 			}
 
 			onClose?.();

@@ -1,41 +1,25 @@
-import {useState} from 'react';
 import {Navigate, useNavigate} from 'react-router-dom';
 import {useAppStore} from '@/stores/app';
-import {createUser} from '@/firebase/firestore';
+import {useProfileForm} from '@/hooks/useProfileForm';
 import {uploadFile} from '@/firebase/storage';
+import {createUserPhotoURL} from '@/utils/createUserPhotoURL';
+import {createUser} from '@/firebase/firestore';
 import NoUser from '@/components/templates/NoUser';
 import Button from '@/components/atoms/Button';
 import UploadImage from '@/components/molecules/UploadImage';
 import Input from '@/components/atoms/Input';
 import ErrorMessage from '@/components/atoms/ErrorMessage';
+import {checkPhotoExceedsLimit} from '@/utils/checkPhotoExceedsLimit';
 
 export default function Onboarding() {
 	const {authUser, user, setUser} = useAppStore();
 	const navigate = useNavigate();
 
-	const [form, setForm] = useState<{name: string; photo: File | null}>({name: '', photo: null});
-	const [errors, setErrors] = useState<{name?: string; photo?: string; button?: string}>({});
-	const [loading, setLoading] = useState<boolean>(false);
-
-	const onChangeName = (name: string) => {
-		setForm((prev) => ({...prev, name}));
-		setErrors((prev) => ({...prev, name: undefined}));
-	};
-
-	const onChangePhoto = (photo: File | null) => {
-		setForm((prev) => ({...prev, photo}));
-		setErrors((prev) => ({...prev, photo: undefined}));
-	};
+	const {form, errors, loading, setErrors, setLoading, onChangeName, onChangePhoto, validate} =
+		useProfileForm();
 
 	const handleStart = async () => {
-		setErrors({});
-
-		const {name, photo} = form;
-
-		if (!name.trim()) {
-			setErrors((prev) => ({...prev, name: 'Name is required.'}));
-			return;
-		}
+		if (!validate()) return;
 
 		try {
 			setLoading(true);
@@ -43,21 +27,25 @@ export default function Onboarding() {
 			if (authUser) {
 				const newUser: User = {
 					id: authUser.uid,
-					name: name.trim(),
+					name: form.name.trim(),
 					email: authUser.email || '',
 					photo: '',
 				};
 
-				if (photo) {
-					if (photo.size / 1024 > 250) {
+				if (form.photo) {
+					if (checkPhotoExceedsLimit(form.photo)) {
 						setErrors((prev) => ({...prev, photo: 'Image size exceeds 250KB.'}));
 						return;
 					}
 
-					newUser.photo = await uploadFile(photo, `users/${newUser.id}/${photo.name}`);
+					newUser.photo = await uploadFile(
+						form.photo,
+						createUserPhotoURL(newUser.id, form.photo.name),
+					);
 				}
 
 				await createUser(newUser);
+
 				setUser(newUser);
 				navigate('/dashboard');
 			}
