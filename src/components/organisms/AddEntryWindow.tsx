@@ -1,6 +1,7 @@
-import {MOODS_OPTIONS} from '@/constants/moods';
+import {MOODS, MOODS_DATA} from '@/constants/moods';
 import {FEELINGS_OPTIONS} from '@/constants/feelings';
 import {SLEEP_HOURS_OPTIONS} from '@/constants/sleepHours';
+import MoodIcon from '@/components/atoms/MoodIcon';
 import Window from '@/components/atoms/Window';
 import Select from '@/components/molecules/Select';
 import MultiSelect from '@/components/molecules/MultiSelect';
@@ -28,7 +29,11 @@ export default function AddEntryWindow({onClose}: AddEntryWindowProps) {
 				{step === 1 && (
 					<Select
 						label='How was your mood today?'
-						options={MOODS_OPTIONS}
+						options={MOODS.map((mood) => ({
+							label: MOODS_DATA[mood].name,
+							value: mood,
+							icon: <MoodIcon mood={mood} className='w-9 h-9' />,
+						}))}
 						value={form.mood}
 						onChange={(mood) => onChange({mood})}
 					/>

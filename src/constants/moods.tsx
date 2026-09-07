@@ -1,5 +1,3 @@
-import MoodIcon from '@/components/atoms/MoodIcon';
-
 export const MOODS: Mood[] = ['very-sad', 'sad', 'neutral', 'happy', 'very-happy'];
 
 export const MOODS_DATA: Record<
@@ -20,9 +18,3 @@ export const MOODS_VALUES: Record<Mood, number> = MOODS.reduce(
 	},
 	{} as Record<Mood, number>,
 );
-
-export const MOODS_OPTIONS: Option<Mood>[] = Object.entries(MOODS_DATA).map(([key, value]) => ({
-	label: value.name,
-	value: key as Mood,
-	icon: <MoodIcon mood={key as Mood} className='w-9 h-9' />,
-}));
