@@ -7,9 +7,10 @@ interface UploadImageProps {
 	value: File | null;
 	onChange: (value: File) => void;
 	error?: string;
+	url?: string;
 }
 
-export default function UploadImage({value = null, onChange, error}: UploadImageProps) {
+export default function UploadImage({value = null, onChange, error, url}: UploadImageProps) {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	const [src, setSrc] = useState<string>();
@@ -37,7 +38,7 @@ export default function UploadImage({value = null, onChange, error}: UploadImage
 				className='hidden'
 				ref={inputRef}
 			/>
-			<Photo src={src} alt='Uploaded image' />
+			<Photo src={src || url} alt='Uploaded image' />
 			<div className='flex flex-col gap-4'>
 				<div className='flex flex-col gap-1.5'>
 					<p className='text-preset-6-regular text-neutral-900'>Upload Image</p>

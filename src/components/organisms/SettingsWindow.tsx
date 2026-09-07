@@ -1,15 +1,15 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {useAppStore} from '@/stores/app';
 import {updateUser} from '@/firebase/firestore';
 import {uploadFile, deleteFile} from '@/firebase/storage';
 import {createUserPhotoURL} from '@/utils/createUserPhotoURL';
-import {createFileFromURL} from '@/utils/createFileFromURL';
 import Input from '@/components/atoms/Input';
 import SubTitle from '@/components/atoms/SubTitle';
 import Title from '@/components/atoms/Title';
 import Window from '@/components/atoms/Window';
 import UploadImage from '@/components/molecules/UploadImage';
 import Button from '@/components/atoms/Button';
+import ErrorMessage from '@/components/atoms/ErrorMessage';
 
 interface SettingsWindowProps {
 	onClose?: () => void;
@@ -35,21 +35,6 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 		setForm((prev) => ({...prev, photo}));
 		setErrors((prev) => ({...prev, photo: undefined}));
 	};
-
-	useEffect(() => {
-		const fetchUserPhoto = async (url: string) => {
-			try {
-				const file = await createFileFromURL(url, 'profile-photo');
-				setForm((prev) => ({...prev, photo: file}));
-			} catch (error) {
-				console.error('Error fetching user photo:', error);
-			}
-		};
-
-		if (user?.photo && !form.photo) {
-			fetchUserPhoto(user.photo);
-		}
-	}, [user?.photo, form.photo]);
 
 	const handleSave = async () => {
 		setErrors({});
@@ -118,8 +103,14 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 						onChange={onChangeName}
 						error={errors.name}
 					/>
-					<UploadImage value={form.photo} onChange={onChangePhoto} error={errors.photo} />
+					<UploadImage
+						value={form.photo}
+						onChange={onChangePhoto}
+						error={errors.photo}
+						url={user?.photo}
+					/>
 				</div>
+				{errors.button && <ErrorMessage error={errors.button} />}
 				<Button loading={loading} disabled={loading}>
 					Save changes
 				</Button>
