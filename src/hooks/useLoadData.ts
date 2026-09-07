@@ -2,8 +2,6 @@ import {useEffect, useState} from 'react';
 import {useAppStore} from '@/stores/app';
 import {auth} from '@/firebase/config';
 import {getUser, getUserMoods} from '@/firebase/firestore';
-import {signIn} from '@/firebase/auth';
-import {SAMPLE_USER_CREDENTIALS} from '@/constants/sample';
 
 export const useLoadData = () => {
 	const [loading, setLoading] = useState<boolean>(true);
@@ -39,26 +37,6 @@ export const useLoadData = () => {
 
 		return () => unsubscribe();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	// Log in the sample user only on the first load of the app
-	useEffect(() => {
-		const loginSampleUser = async () => {
-			const isFirstLoad = JSON.parse(localStorage.getItem('is-first-load') || 'true');
-
-			if (!isFirstLoad) return;
-
-			try {
-				const {email, password} = SAMPLE_USER_CREDENTIALS;
-				await signIn(email, password);
-			} catch (error) {
-				console.error('Error logging in sample user:', error);
-			}
-
-			localStorage.setItem('is-first-load', 'false');
-		};
-
-		loginSampleUser();
 	}, []);
 
 	return {loading, error};
