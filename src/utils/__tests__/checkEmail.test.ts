@@ -15,7 +15,7 @@ describe('checkEmail', () => {
 	});
 
 	it('accepts common valid boundary formats', () => {
-		expect(checkEmail('person+tag@example.com')).toBe(false);
+		expect(checkEmail('person+tag@example.com')).toBe(true);
 		expect(checkEmail('person.lastname@example.co.uk')).toBe(true);
 		expect(checkEmail('person-name@example.com')).toBe(true);
 	});

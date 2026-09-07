@@ -56,7 +56,7 @@ export default function SettingsWindow({onClose}: SettingsWindowProps) {
 
 		const {name, photo} = form;
 
-		if (!name) {
+		if (!name.trim()) {
 			setErrors((prev) => ({...prev, name: 'Name is required.'}));
 			return;
 		}
