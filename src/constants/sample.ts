@@ -6,6 +6,11 @@ export const SAMPLE_USER: User = {
 		'https://firebasestorage.googleapis.com/v0/b/mood-app-paladinescamila.firebasestorage.app/o/users%2FQjemPXthw4cxCrL97KRnEftFoHi2%2Fprofile.jpg?alt=media&token=24dc20c4-0e9b-4fb1-9eb6-0714ec776550',
 };
 
+export const SAMPLE_USER_CREDENTIALS: {email: string; password: string} = {
+	email: SAMPLE_USER.email,
+	password: import.meta.env.VITE_SAMPLE_USER_PASSWORD,
+};
+
 export const SAMPLE_MOODS_HISTORY: MoodEntry[] = [
 	{
 		id: 'mtqgzdak-0ze909vj2nhi811wkgqxd0bcpfgf027sog44',

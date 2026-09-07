@@ -1,6 +1,7 @@
 import {useState} from 'react';
-import {logout} from '@/firebase/auth';
+import {signOut} from '@/firebase/auth';
 import {useClickOutside} from '@/hooks/useClickOutside';
+import {useAppStore} from '@/stores/app';
 import Icon from '@/components/atoms/Icon';
 import Photo from '@/components/atoms/Photo';
 import SettingsWindow from '@/components/organisms/SettingsWindow';
@@ -10,6 +11,8 @@ interface ProfileMenuProps {
 }
 
 export default function ProfileMenu({user}: ProfileMenuProps) {
+	const {setAuthUser, setUser, setMoodsHistory} = useAppStore();
+
 	const [menuIsOpened, setMenuIsOpened] = useState<boolean>(false);
 	const [settingsWindowIsOpened, setSettingsWindowIsOpened] = useState<boolean>(false);
 
@@ -18,6 +21,18 @@ export default function ProfileMenu({user}: ProfileMenuProps) {
 	const handleOpenSettings = () => {
 		setMenuIsOpened(false);
 		setSettingsWindowIsOpened(true);
+	};
+
+	const logout = async () => {
+		try {
+			await signOut();
+
+			setAuthUser(null);
+			setUser(null);
+			setMoodsHistory([]);
+		} catch (error) {
+			console.error('Error signing out:', error);
+		}
 	};
 
 	return (

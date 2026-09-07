@@ -3,6 +3,7 @@ import {useAppStore} from '@/stores/app';
 import {auth} from '@/firebase/config';
 import {getUser, getUserMoods} from '@/firebase/firestore';
 import {signIn} from '@/firebase/auth';
+import {SAMPLE_USER_CREDENTIALS} from '@/constants/sample';
 
 export const useLoadData = () => {
 	const [loading, setLoading] = useState<boolean>(true);
@@ -23,13 +24,10 @@ export const useLoadData = () => {
 
 					if (userDoc) {
 						setUser(userDoc);
+
 						const moodsHistory = await getUserMoods(authUser.uid);
 						setMoodsHistory(moodsHistory);
 					}
-				} else {
-					setAuthUser(null);
-					setUser(null);
-					setMoodsHistory([]);
 				}
 			} catch (loadError) {
 				console.error('Error loading user data:', loadError);
@@ -51,10 +49,8 @@ export const useLoadData = () => {
 			if (!isFirstLoad) return;
 
 			try {
-				const SAMPLE_USER_EMAIL = 'lisa@mail.com';
-				const SAMPLE_USER_PASSWORD = import.meta.env.VITE_SAMPLE_USER_PASSWORD;
-
-				await signIn(SAMPLE_USER_EMAIL, SAMPLE_USER_PASSWORD);
+				const {email, password} = SAMPLE_USER_CREDENTIALS;
+				await signIn(email, password);
 			} catch (error) {
 				console.error('Error logging in sample user:', error);
 			}
