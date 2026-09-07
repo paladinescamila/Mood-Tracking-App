@@ -100,12 +100,12 @@ export const DEMO_MOODS: MoodEntry[] = [
 		mood: 'happy',
 		sleepHours: '7-8',
 	},
-	// {
-	// 	sleepHours: '7-8',
-	// 	feelings: ['optimistic', 'content'],
-	// 	id: 'mtrholqo-q0gm7zaz1g18sb7ua556ouq1xjwmxi4h7g6d',
-	// 	createdAt: '2026-09-07T17:03:06.000Z',
-	// 	journalEntry: 'It has been a good day',
-	// 	mood: 'happy',
-	// },
+	{
+		sleepHours: '7-8',
+		feelings: ['optimistic', 'content'],
+		id: 'mtrholqo-q0gm7zaz1g18sb7ua556ouq1xjwmxi4h7g6d',
+		createdAt: '2026-09-07T17:03:06.000Z',
+		journalEntry: 'It has been a good day',
+		mood: 'happy',
+	},
 ];
