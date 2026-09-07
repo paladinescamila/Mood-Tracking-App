@@ -6,7 +6,7 @@ This is a solution to the [Mood Tracking App challenge on Frontend Mentor](https
 
 ## Links
 
-- [Solution](https://www.frontendmentor.io/solutions/mood-tracking-app-oYBVOuORWH)
+- [Solution](https://www.frontendmentor.io/solutions/mood-tracking-app-0e2KxzdEyM)
 - [Live Site](http://mood-app-paladinescamila.netlify.app)
 
 ## Built with
