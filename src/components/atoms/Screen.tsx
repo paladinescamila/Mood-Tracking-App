@@ -8,7 +8,7 @@ export default function Screen({children, className = ''}: ScreenProps) {
 		<main
 			id='page-main'
 			tabIndex={-1}
-			className={`custom-gradient w-full min-h-dvh flex flex-col p-4 ${className}`}>
+			className={`custom-gradient w-full min-h-dvh flex flex-col p-4 ${className} outline-none`}>
 			{children}
 		</main>
 	);
